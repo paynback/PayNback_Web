@@ -1,0 +1,30 @@
+[19-Apr-2025 00:36:29 UTC] PHP Warning:  require(PHPMailer/src/Exception.php): Failed to open stream: No such file or directory in /home/zdktjyt58t7j/public_html/sendemail.php on line 8
+[19-Apr-2025 00:36:29 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'PHPMailer/src/Exception.php' (include_path='.:/opt/alt/php82/usr/share/pear:/opt/alt/php82/usr/share/php:/usr/share/pear:/usr/share/php') in /home/zdktjyt58t7j/public_html/sendemail.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/zdktjyt58t7j/public_html/sendemail.php on line 8
+[19-Apr-2025 17:29:53 UTC] PHP Warning:  require(PHPMailer/src/Exception.php): Failed to open stream: No such file or directory in /home/zdktjyt58t7j/public_html/sendemail.php on line 8
+[19-Apr-2025 17:29:53 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'PHPMailer/src/Exception.php' (include_path='.:/opt/alt/php82/usr/share/pear:/opt/alt/php82/usr/share/php:/usr/share/pear:/usr/share/php') in /home/zdktjyt58t7j/public_html/sendemail.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/zdktjyt58t7j/public_html/sendemail.php on line 8
+[27-Apr-2025 02:07:32 UTC] PHP Warning:  require(PHPMailer/src/Exception.php): Failed to open stream: No such file or directory in /home/zdktjyt58t7j/public_html/sendemail.php on line 8
+[27-Apr-2025 02:07:32 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'PHPMailer/src/Exception.php' (include_path='.:/opt/alt/php82/usr/share/pear:/opt/alt/php82/usr/share/php:/usr/share/pear:/usr/share/php') in /home/zdktjyt58t7j/public_html/sendemail.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/zdktjyt58t7j/public_html/sendemail.php on line 8
+[05-May-2025 03:23:57 UTC] PHP Warning:  require(PHPMailer/src/Exception.php): Failed to open stream: No such file or directory in /home/zdktjyt58t7j/public_html/sendemail.php on line 8
+[05-May-2025 03:23:57 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'PHPMailer/src/Exception.php' (include_path='.:/opt/alt/php82/usr/share/pear:/opt/alt/php82/usr/share/php:/usr/share/pear:/usr/share/php') in /home/zdktjyt58t7j/public_html/sendemail.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/zdktjyt58t7j/public_html/sendemail.php on line 8
+[20-May-2025 15:13:33 UTC] PHP Warning:  require(PHPMailer/src/Exception.php): Failed to open stream: No such file or directory in /home/zdktjyt58t7j/public_html/sendemail.php on line 8
+[20-May-2025 15:13:33 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'PHPMailer/src/Exception.php' (include_path='.:/opt/alt/php82/usr/share/pear:/opt/alt/php82/usr/share/php:/usr/share/pear:/usr/share/php') in /home/zdktjyt58t7j/public_html/sendemail.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/zdktjyt58t7j/public_html/sendemail.php on line 8
+[23-May-2025 02:14:25 UTC] PHP Warning:  require(PHPMailer/src/Exception.php): Failed to open stream: No such file or directory in /home/zdktjyt58t7j/public_html/sendemail.php on line 8
+[23-May-2025 02:14:25 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'PHPMailer/src/Exception.php' (include_path='.:/opt/alt/php82/usr/share/pear:/opt/alt/php82/usr/share/php:/usr/share/pear:/usr/share/php') in /home/zdktjyt58t7j/public_html/sendemail.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/zdktjyt58t7j/public_html/sendemail.php on line 8
