@@ -27,7 +27,7 @@
     <link href="css/responsive.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f7489ab238.js" crossorigin="anonymous"></script>
     
-    <!-- iOS Safari/Chrome Fix for Zoom and White Space Issues -->
+    <!-- iOS and Android Mobile Fix for Zoom and White Space Issues -->
     <style>
         /* iOS-specific fixes to prevent zoom and white space */
         @supports (-webkit-touch-callout: none) {
@@ -61,6 +61,38 @@
             }
         }
         
+        /* Android-specific fixes to prevent zoom and white space */
+        @media screen and (max-width: 768px) {
+            html {
+                -webkit-text-size-adjust: 100%;
+                -ms-text-size-adjust: 100%;
+                text-size-adjust: 100%;
+            }
+            
+            body {
+                overflow-x: hidden;
+                width: 100%;
+                position: relative;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            /* Prevent Android zoom on input focus */
+            input, select, textarea {
+                font-size: 16px !important;
+            }
+            
+            /* Ensure proper viewport behavior on Android */
+            .container, .outer-container {
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+            
+            /* Fix for Android Chrome viewport issues */
+            * {
+                -webkit-tap-highlight-color: transparent;
+            }
+        }
+        
         /* Additional iOS Chrome specific fixes */
         @media screen and (-webkit-min-device-pixel-ratio: 0) {
             @supports (-webkit-touch-callout: none) {
@@ -68,6 +100,14 @@
                     -webkit-transform: translateZ(0);
                     transform: translateZ(0);
                 }
+            }
+        }
+        
+        /* Additional Android Chrome specific fixes */
+        @media screen and (max-width: 768px) {
+            body {
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
             }
         }
     </style>
