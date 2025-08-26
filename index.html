@@ -1265,6 +1265,45 @@
     <!-- main-js -->
     <script src="js/script.js"></script>
 
+    <!-- Android-only: prevent pinch/double-tap zoom and right-side whitespace shrink -->
+    <script>
+        (function () {
+            var isAndroid = /Android/i.test(navigator.userAgent);
+            if (!isAndroid) return;
+
+            var vp = document.querySelector('meta[name="viewport"]');
+            if (vp) {
+                var current = vp.getAttribute('content') || '';
+                if (!/maximum-scale|user-scalable/.test(current)) {
+                    vp.setAttribute('content', current + ', maximum-scale=1, user-scalable=no');
+                }
+            }
+
+            // Block pinch zoom
+            document.addEventListener('touchstart', function (e) {
+                if (e.touches && e.touches.length > 1) e.preventDefault();
+            }, { passive: false });
+
+            // Block double-tap zoom
+            var lastTouchEnd = 0;
+            document.addEventListener('touchend', function (e) {
+                var now = Date.now();
+                if (now - lastTouchEnd <= 300) e.preventDefault();
+                lastTouchEnd = now;
+            }, { passive: false });
+
+            // Prevent Ctrl + wheel zoom on Android Chrome
+            document.addEventListener('wheel', function (e) {
+                if (e.ctrlKey) e.preventDefault();
+            }, { passive: false });
+
+            // Ensure no horizontal overflow
+            document.documentElement.style.overflowX = 'hidden';
+            document.body.style.overflowX = 'hidden';
+            document.body.style.width = '100%';
+        })();
+    </script>
+
 </body><!-- End of .page_wrapper -->
 
 </html>
