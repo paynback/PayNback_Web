@@ -26,7 +26,7 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f7489ab238.js" crossorigin="anonymous"></script>
-    
+
     <!-- iOS and Android Mobile Fix for Zoom and White Space Issues -->
     <style>
         /* iOS-specific fixes to prevent zoom and white space */
@@ -36,31 +36,34 @@
                 -ms-text-size-adjust: 100%;
                 text-size-adjust: 100%;
             }
-            
+
             body {
                 -webkit-overflow-scrolling: touch;
                 overflow-x: hidden;
                 width: 100vw;
                 position: relative;
             }
-            
+
             /* Prevent iOS zoom on input focus */
-            input, select, textarea {
+            input,
+            select,
+            textarea {
                 font-size: 16px !important;
             }
-            
+
             /* Ensure proper viewport behavior */
-            .container, .outer-container {
+            .container,
+            .outer-container {
                 max-width: 100vw;
                 overflow-x: hidden;
             }
-            
+
             /* Fix for iOS Safari viewport issues */
             * {
                 -webkit-tap-highlight-color: transparent;
             }
         }
-        
+
         /* Android-specific fixes to prevent zoom and white space */
         @media screen and (max-width: 768px) {
             html {
@@ -68,31 +71,34 @@
                 -ms-text-size-adjust: 100%;
                 text-size-adjust: 100%;
             }
-            
+
             body {
                 overflow-x: hidden;
                 width: 100%;
                 position: relative;
                 -webkit-overflow-scrolling: touch;
             }
-            
+
             /* Prevent Android zoom on input focus */
-            input, select, textarea {
+            input,
+            select,
+            textarea {
                 font-size: 16px !important;
             }
-            
+
             /* Ensure proper viewport behavior on Android */
-            .container, .outer-container {
+            .container,
+            .outer-container {
                 max-width: 100%;
                 overflow-x: hidden;
             }
-            
+
             /* Fix for Android Chrome viewport issues */
             * {
                 -webkit-tap-highlight-color: transparent;
             }
         }
-        
+
         /* Additional iOS Chrome specific fixes */
         @media screen and (-webkit-min-device-pixel-ratio: 0) {
             @supports (-webkit-touch-callout: none) {
@@ -102,7 +108,7 @@
                 }
             }
         }
-        
+
         /* Additional Android Chrome specific fixes */
         @media screen and (max-width: 768px) {
             body {
@@ -181,19 +187,26 @@
             </div>
             <div class="contact-info">
                 <h4>Contact Info</h4>
-                <ul>   
+                <ul>
                     <!-- <li>Office 5i, Blueberry, Expy, Info Park, Kakkanad, Cochin</li> -->
                     <li><i class="fas fa-phone"></i><a href="tel:+91 8301005296">&nbsp;+91 8301005296</a></li>
-                    <li><img src="images\wtsapp.png" height="15" width="15"><a href="tel:+91 8301005297">&nbsp;+91 8301005297</a></li>
-                    <li><i class="fas fa-envelope"></i><a href="mailto:info@paynback.com">&nbsp;info@paynback.com</a></li>
+                    <li><img src="images\wtsapp.png" height="15" width="15"><a href="tel:+91 8301005297">&nbsp;+91
+                            8301005297</a></li>
+                    <li><i class="fas fa-envelope"></i><a href="mailto:info@paynback.com">&nbsp;info@paynback.com</a>
+                    </li>
                 </ul>
             </div>
             <div class="social-links">
                 <ul class="clearfix">
-                    <li><a href="https://www.facebook.com/people/Pay-N-Back/61559338322294/?mibextid=ZbWKwL"><i class="fab fa-facebook-f"></i></a></li>
-                    <li><a href="https://www.instagram.com/paynback_/?igsh=YzljYTk1ODg3Zg%3D%3D"><i class="fa-brands fa-instagram"></i></a></li>
-                    <li><a href="https://x.com/pay_n_back?t=F9anwGepQxnEOcIY39a1yA&s=08"><i class="fa-brands fa-x-twitter"></i></a></li>
-                    <li><a href="https://www.linkedin.com/search/results/all/?keywords=paynback&origin=SPELL_CHECK_REPLACE&sid=eBL&spellCorrectionEnabled=false"><i class="fab fa-linkedin-in"></i></a></li>
+                    <li><a href="https://www.facebook.com/people/Pay-N-Back/61559338322294/?mibextid=ZbWKwL"><i
+                                class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="https://www.instagram.com/paynback_/?igsh=YzljYTk1ODg3Zg%3D%3D"><i
+                                class="fa-brands fa-instagram"></i></a></li>
+                    <li><a href="https://x.com/pay_n_back?t=F9anwGepQxnEOcIY39a1yA&s=08"><i
+                                class="fa-brands fa-x-twitter"></i></a></li>
+                    <li><a
+                            href="https://www.linkedin.com/search/results/all/?keywords=paynback&origin=SPELL_CHECK_REPLACE&sid=eBL&spellCorrectionEnabled=false"><i
+                                class="fab fa-linkedin-in"></i></a></li>
                     <li><a href="https://in.pinterest.com/paynback/"><span class="fab fa-pinterest-p"></span></a></li>
                     <li><a href="https://www.youtube.com/@paynback-xl6zn"><i class="fa-brands fa-youtube"></i></a></li>
                 </ul>
@@ -213,17 +226,30 @@
                         <h1>Shop Smarter with PayNback</h1>
                         <div class="text">Sign up and become a member today to get exclusive offers in your area and
                             other benefits.</div>
-                        <div class="btn-box"><a
-                                href="https://play.google.com/store/apps/details?id=com.paynback.userapp">Get
-                                App Now</a></div>
+                        <h1 class="fw-bold mt-3">Get The App Now</h1>
+                        <div class="d-flex">
+                            <div class="btn-box mr-1">
+                                <a href="https://play.google.com/store/apps/details?id=com.paynback.userapp"
+                                    class="btn btn-primary">
+                                    Play Store
+                                </a>
+                            </div>
+                            <div class="btn-box ml-1">
+                                <a href="https://apps.apple.com/in/app/paynback/id6751259946" class="btn btn-dark">
+                                    App Store
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 col-sm-12 image-column">
                     <div class="image-box float-bob-y clearfix">
                         <figure class="image image-1 wow fadeInUp" data-wow-delay="900ms" data-wow-duration="1500ms">
-                            <img src="images/phone-New.png" alt=""></figure>
+                            <img src="images/phone-New.png" alt="">
+                        </figure>
                         <figure class="image image-2 wow fadeInUp" data-wow-delay="1500ms" data-wow-duration="1500ms">
-                            <img src="images/phone-2new.png" alt=""></figure>
+                            <img src="images/phone-2new.png" alt="">
+                        </figure>
                     </div>
                 </div>
             </div>
@@ -401,9 +427,11 @@
                                     <div class="bg-layer" style="background-image: url(images/icons/image-shap-1.png);">
                                     </div>
                                     <figure class="image-1 wow slideInRight" data-wow-delay="300ms"
-                                        data-wow-duration="1500ms"><img src="images/p7.png" style="width: 444px;height: 685px;" alt=""></figure>
+                                        data-wow-duration="1500ms"><img src="images/p7.png"
+                                            style="width: 444px;height: 685px;" alt=""></figure>
                                     <figure class="image-2 wow slideInRight" data-wow-delay="00ms"
-                                        data-wow-duration="1500ms"><img src="images/p8.png" style="width: 386px;height: 609px;" alt=""></figure>
+                                        data-wow-duration="1500ms"><img src="images/p8.png"
+                                            style="width: 386px;height: 609px;" alt=""></figure>
                                 </div>
                             </div>
                         </div>
@@ -417,9 +445,11 @@
                                     <div class="bg-layer" style="background-image: url(images/icons/image-shap-2.png);">
                                     </div>
                                     <figure class="image-1 wow slideInLeft" data-wow-delay="00ms"
-                                        data-wow-duration="1500ms"><img src="images/p3.png"  style="width: 295px; height: 609px;"  alt=""></figure>
+                                        data-wow-duration="1500ms"><img src="images/p3.png"
+                                            style="width: 295px; height: 609px;" alt=""></figure>
                                     <figure class="image-2 wow slideInLeft" data-wow-delay="300ms"
-                                        data-wow-duration="1500ms"><img src="images/p4.png"  style="width: 295px; height: 609px;" alt=""></figure>
+                                        data-wow-duration="1500ms"><img src="images/p4.png"
+                                            style="width: 295px; height: 609px;" alt=""></figure>
                                 </div>
                             </div>
                         </div>
@@ -459,7 +489,7 @@
                 <div class="col-lg-6 col-md-12 col-sm-12 video-column d-flex align-items-center justify-content-center">
                     <!-- <div class="video-inner"> -->
                     <!-- <a href="https://www.youtube.com/watch?v=nfP5N9Yc72A&amp;t=28s" class="lightbox-image" data-caption=""> -->
-                    <video controls autoplay muted  height="600" width="600" id="videoPlayer">
+                    <video controls autoplay muted height="600" width="600" id="videoPlayer">
                         <!-- loop muted  -->
                         <source src=videos/video4.mp4 type="video/mp4" class="lightbox-image">
                         <!-- <source src=videos/video2.mp4 type="video/mp4" class="lightbox-image">  -->
@@ -532,17 +562,28 @@
                 <div class="col-md-4">
                     <img src="images/discounts.png" height="70" width="70">
                     <h5 class="pt-3"><b>Exclusive Discounts</b></h5>
-                    <p class="text-justify pt-3">PayNback gives users access to exclusive discounts, including special deals with partnered retailers, time-limited promotions, and unique coupon codes. These offers deliver significant savings on a wide range of products and services, making PayNback the go-to platform for users looking to maximize their purchasing power and secure the best possible deals.</p>
+                    <p class="text-justify pt-3">PayNback gives users access to exclusive discounts, including special
+                        deals with partnered retailers, time-limited promotions, and unique coupon codes. These offers
+                        deliver significant savings on a wide range of products and services, making PayNback the go-to
+                        platform for users looking to maximize their purchasing power and secure the best possible
+                        deals.</p>
                 </div>
                 <div class="col-md-4">
                     <img src="images/gift-box3.png" height="70" width="70">
                     <h5 class="pt-3"><b>Rewarding Points System</b></h5>
-                    <p class="text-justify pt-3">PayNback’s rewarding points system incentivizes users to shop and engage with the platform. With each purchase, users earn points that can be accumulated and redeemed for various rewards. This encourages repeat business while offering tangible benefits for loyalty, such as gift cards, merchandise, or cashback, adding extra value to the shopping experience.</p>
+                    <p class="text-justify pt-3">PayNback’s rewarding points system incentivizes users to shop and
+                        engage with the platform. With each purchase, users earn points that can be accumulated and
+                        redeemed for various rewards. This encourages repeat business while offering tangible benefits
+                        for loyalty, such as gift cards, merchandise, or cashback, adding extra value to the shopping
+                        experience.</p>
                 </div>
                 <div class="col-md-4">
                     <img src="images/network1.png" height="70" width="70">
                     <h5 class="pt-3"><b>Referral Program</b></h5>
-                    <p class="text-justify pt-3">PayNback’s referral program rewards users for bringing new customers to the platform. When a user refers a friend or family member, both the referrer and the new user receive bonuses, such as extra points or discounts on their next purchase. This creates a win-win, fostering community growth while offering valuable incentives to share PayNback.</p>
+                    <p class="text-justify pt-3">PayNback’s referral program rewards users for bringing new customers to
+                        the platform. When a user refers a friend or family member, both the referrer and the new user
+                        receive bonuses, such as extra points or discounts on their next purchase. This creates a
+                        win-win, fostering community growth while offering valuable incentives to share PayNback.</p>
                     <!-- <p class="text-justify pt-3">PayNback’s referral program rewards users for bringing new customers to the platform. When a user refers a friend or family member, both the referrer and the new user receive bonuses, such as extra points or discounts on their next purchase. This creates a win-win scenario, fostering community growth while providing valuable incentives for users to share PayNback with others.</p> -->
                 </div>
             </div>
@@ -550,17 +591,27 @@
                 <div class="col-md-4">
                     <img src="images/check.png" height="70" width="70">
                     <h5 class="pt-3"><b>Modern and User-Friendly Experience</b></h5>
-                    <p class="text-justify pt-3">PayNback offers a sleek, intuitive interface for seamless navigation. With features like easy deal access, personalized recommendations, and smooth checkout, the platform enhances user experience. The mobile app also provides convenient access to discounts, point tracking, and account management, making PayNback perfect for tech-savvy consumers.</p>
+                    <p class="text-justify pt-3">PayNback offers a sleek, intuitive interface for seamless navigation.
+                        With features like easy deal access, personalized recommendations, and smooth checkout, the
+                        platform enhances user experience. The mobile app also provides convenient access to discounts,
+                        point tracking, and account management, making PayNback perfect for tech-savvy consumers.</p>
                 </div>
                 <div class="col-md-4">
                     <img src="images/shield1.png" height="70" width="70">
                     <h5 class="pt-3"><b>Secure and Reliable Transactions</b></h5>
-                    <p class="text-justify pt-3">PayNback prioritizes transaction security and reliability, ensuring users can shop with confidence. The platform uses advanced encryption and security protocols to protect personal and financial information. With prompt customer support for transaction issues, PayNback builds trust and encourages continued use of the platform.</p>
+                    <p class="text-justify pt-3">PayNback prioritizes transaction security and reliability, ensuring
+                        users can shop with confidence. The platform uses advanced encryption and security protocols to
+                        protect personal and financial information. With prompt customer support for transaction issues,
+                        PayNback builds trust and encourages continued use of the platform.</p>
                 </div>
                 <div class="col-md-4">
                     <img src="images/personalize.png" height="70" width="70">
                     <h5 class="pt-3"><b>Personalized Recommendations</b></h5>
-                    <p class="text-justify pt-3">PayNback uses advanced algorithms and user data to deliver tailored offers and recommendations based on shopping habits and preferences. By analyzing past purchases and browsing behavior, it suggests relevant deals and products, making the shopping experience more personalized and convenient. This helps users discover new items and save on what they want.</p>
+                    <p class="text-justify pt-3">PayNback uses advanced algorithms and user data to deliver tailored
+                        offers and recommendations based on shopping habits and preferences. By analyzing past purchases
+                        and browsing behavior, it suggests relevant deals and products, making the shopping experience
+                        more personalized and convenient. This helps users discover new items and save on what they
+                        want.</p>
                 </div>
             </div>
         </div>
@@ -627,10 +678,12 @@
                         <div class="image-box">
                             <div class="bg-layer" style="background-image: url(images/icons/image-shap-2.png);">
                             </div>
-                            <figure class="image-1 wow slideInLeft" data-wow-delay="00ms"
-                                data-wow-duration="1500ms"><img src="images/p5.png" style="width:290px;height:600px;" alt=""></figure>
-                            <figure class="image-2 wow slideInLeft" data-wow-delay="300ms"
-                                data-wow-duration="1500ms"><img src="images/p6.png" style="width:290px;height:600px;" alt=""></figure>
+                            <figure class="image-1 wow slideInLeft" data-wow-delay="00ms" data-wow-duration="1500ms">
+                                <img src="images/p5.png" style="width:290px;height:600px;" alt="">
+                            </figure>
+                            <figure class="image-2 wow slideInLeft" data-wow-delay="300ms" data-wow-duration="1500ms">
+                                <img src="images/p6.png" style="width:290px;height:600px;" alt="">
+                            </figure>
                         </div>
                     </div>
                 </div>
@@ -700,7 +753,8 @@
         <div class="container">
             <div class="sec-title center">
                 <h2>Blog & News Updates</h2>
-                <p>Join the PayNback Revolution: Discover Exclusive Discounts, Rewarding Points, and Seamless Shopping.<br> Connect with Us to Stay Updated and Experience the Future of E-Commerce!</p>
+                <p>Join the PayNback Revolution: Discover Exclusive Discounts, Rewarding Points, and Seamless
+                    Shopping.<br> Connect with Us to Stay Updated and Experience the Future of E-Commerce!</p>
             </div>
             <div class="inner-content">
                 <div class="row">
@@ -711,7 +765,12 @@
                                             alt=""></a></figure>
                                 <div class="lower-content">
                                     <h3>PayNback: Quietly Revolutionizing Offline Shopping</h3>
-                                    <div class="text"><b>Kochi, Kerala, India – July 1, 2024 –</b> PayNback, a groundbreaking new platform designed to elevate the offline shopping experience, made its stealth launch on July 1st. The platform is poised to redefine how consumers interact with brick-and-mortar stores, offering a host of benefits including exclusive discounts, rewarding points, and unparalleled convenience...</div>
+                                    <div class="text"><b>Kochi, Kerala, India – July 1, 2024 –</b> PayNback, a
+                                        groundbreaking new platform designed to elevate the offline shopping experience,
+                                        made its stealth launch on July 1st. The platform is poised to redefine how
+                                        consumers interact with brick-and-mortar stores, offering a host of benefits
+                                        including exclusive discounts, rewarding points, and unparalleled convenience...
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -723,8 +782,12 @@
                                             alt=""></a></figure>
                                 <div class="lower-content">
                                     <!-- <h3>Revolutionizing Shopping: PayNback’s Seamless Integration of Online and Offline Experiences</h3> -->
-                                     <h3>PayNback: Seamless Integration of Online and Offline Shopping</h3>
-                                    <div class="text">PayNback is set to transform the way people shop by providing a seamless and rewarding experience. PayNback aims to bridge the gap between online and offline shopping, offering the best of both worlds. Experience shopping redefined with PayNback. Discover a new era of shopping with PayNback, where innovation meets satisfaction....</div>
+                                    <h3>PayNback: Seamless Integration of Online and Offline Shopping</h3>
+                                    <div class="text">PayNback is set to transform the way people shop by providing a
+                                        seamless and rewarding experience. PayNback aims to bridge the gap between
+                                        online and offline shopping, offering the best of both worlds. Experience
+                                        shopping redefined with PayNback. Discover a new era of shopping with PayNback,
+                                        where innovation meets satisfaction....</div>
                                 </div>
                             </div>
                         </div>
@@ -738,7 +801,9 @@
                                 <div class="lower-content">
                                     <h3>PayNback's Exciting Journey Ahead</h3>
                                     <!-- <div class="text">Are you ready to take your business to the next level? Join PayNback, the modern e-commerce platform designed to empower merchants and drive your business growth. By becoming a part of the PayNback community, you’ll tap into a world of exclusive benefits, seamless tools, and valuable resources that will help your business thrive in today’s competitive marketplace...</div> -->
-                                     <div class="text">This is just the beginning of the PayNback journey. We are excited to unveil more about our platform and its impact in the coming weeks. Stay tuned for updates and exciting announcements!</div>
+                                    <div class="text">This is just the beginning of the PayNback journey. We are excited
+                                        to unveil more about our platform and its impact in the coming weeks. Stay tuned
+                                        for updates and exciting announcements!</div>
                                 </div>
                             </div>
                         </div>
@@ -748,8 +813,10 @@
                             <div class="inner-box">
                                 <div class="lower-content">
                                     <!-- <h3>Maximize Your Rewards: How PayNback’s Referral Program Can Help You Earn More</h3> -->
-                                     <h3>Begin Referral Programs</h3>
-                                    <div class="text">At PayNback, shopping smarter means rewards for you and your referrals. Earn by sharing the PayNback experience with friends and family. Enjoy the benefits of spreading the love while you shop!</div>
+                                    <h3>Begin Referral Programs</h3>
+                                    <div class="text">At PayNback, shopping smarter means rewards for you and your
+                                        referrals. Earn by sharing the PayNback experience with friends and family.
+                                        Enjoy the benefits of spreading the love while you shop!</div>
                                 </div>
                             </div>
                         </div>
@@ -792,7 +859,7 @@
     <!--        <div id="instagram-posts" style="display: flex; justify-content: center; flex-wrap: wrap;"></div>-->
     <!--    </div>-->
     <!--</section>-->
-    
+
 
 
     <!-- testimonial-section -->
@@ -810,7 +877,9 @@
                             <div class="testimonial-block-one">
                                 <div class="inner-box">
                                     <figure class="image-box"><img src="images/t3.png" alt=""></figure>
-                                    <div class="text">“I’ve been using PayNback since it launched, and it’s been amazing for my business. I’ve gained more customers, increased profits, and seen real growth. Highly recommended!”</div>
+                                    <div class="text">“I’ve been using PayNback since it launched, and it’s been amazing
+                                        for my business. I’ve gained more customers, increased profits, and seen real
+                                        growth. Highly recommended!”</div>
                                     <div class="author-info">
                                         <h5 class="name">Arun Dev</h5>
                                         <span class="designation">Supermarket Owner</span>
@@ -823,7 +892,9 @@
                                 <div class="inner-box">
                                     <figure class="image-box"><img src="images/t8.png" alt=""></figure>
                                     <!-- <div class="text">“PayNback has transformed my shopping with exclusive discounts, easy rewards, and smooth navigation. The referral program is a bonus. It’s made shopping smarter and more enjoyable!”</div> -->
-                                     <div class="text">"PayNback has truly changed the way I shop. The discounts are great, the offers keep coming, and the rewards are top-notch. I absolutely recommend it!"</div>
+                                    <div class="text">"PayNback has truly changed the way I shop. The discounts are
+                                        great, the offers keep coming, and the rewards are top-notch. I absolutely
+                                        recommend it!"</div>
                                     <div class="author-info">
                                         <h5 class="name">Divya Manoj</h5>
                                         <span class="designation">Happy PayNback User</span>
@@ -914,9 +985,10 @@
                             <div class="sec-title">
                                 <h2>Get The App Now!</h2>
                             </div>
-                            <div class="text">Elevate your shopping game —<br>grab the PayNback app now for exclusive savings and endless rewards!</div>
+                            <div class="text">Elevate your shopping game —<br>grab the PayNback app now for exclusive
+                                savings and endless rewards!</div>
                             <div class="download-btn">
-                                <a href="#" class="app-store-btn">
+                                <a href="https://apps.apple.com/in/app/paynback/id6751259946" class="app-store-btn">
                                     <i class="fab fa-apple"></i>
                                     <span>Download on the</span>
                                     App Store
@@ -1002,7 +1074,7 @@
     </section> -->
     <!-- news-section end -->
 
-<br><br><br>
+    <br><br><br>
     <!-- subscribe-section -->
     <section class="subscribe-section">
         <div class="container">
@@ -1021,7 +1093,8 @@
                             <div class="sec-title">
                                 <h2>Subscribe our Newsletter</h2>
                             </div>
-                            <div class="text">Subscribe to our newsletter for exclusive deals, rewards, and early access to offers. Stay ahead with PayNback!</div>
+                            <div class="text">Subscribe to our newsletter for exclusive deals, rewards, and early access
+                                to offers. Stay ahead with PayNback!</div>
                             <form action="#" method="post" class="subscribe-form">
                                 <div class="form-group">
                                     <input type="email" name="email" placeholder="Enter Your Email" required="">
@@ -1036,8 +1109,8 @@
     </section>
     <!-- subscribe-section end -->
 
-      <!-- main-footer -->
-      <footer class="main-footer style-five style-six">
+    <!-- main-footer -->
+    <footer class="main-footer style-five style-six">
         <!-- <div class="anim-icons">
             <div class="icon icon-1"><img src="images/icons/pattern-21.png" alt=""></div>
         </div> -->
@@ -1051,28 +1124,29 @@
                                 <figure class="footer-logo"><a href="index.html"><img
                                             src="images/PayNbackLogo512X254.png" height="70" width="141" alt=""></a>
                                 </figure>
-                                <div class="text">PayNback is India's first in-store shopping support app that offers rewards and discounts to consumers.</div>
+                                <div class="text">PayNback is India's first in-store shopping support app that offers
+                                    rewards and discounts to consumers.</div>
 
                                 <div class="text-white">
                                     <h3>Certifications</h3>
-                                    <div class="row g-2 mt-4"> 
+                                    <div class="row g-2 mt-4">
                                         <div class="col-4 text-center">
-                                            <img src="https://cdn.brandfetch.io/id-530njgd/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1741372423376" 
-                                                 alt="Kerala Startup Mission" class="img-fluid" style="height: 80px;">
+                                            <img src="fonts/KSUM LOGO_WhiteBG.svg" alt="Kerala Startup Mission"
+                                                class="img-fluid" style="height: 90px;">
+
+
                                         </div>
                                         <div class="col-4 text-center">
-                                            <img src="https://crystalpng.com/wp-content/uploads/2025/01/startup-india-logo-gradient-circle.png" 
-                                                 alt="Startup India" class="img-fluid" style="height: 80px;">
+                                            <img src="fonts/Startup india LOGO_WhiteBG.svg" alt="Startup India"
+                                                class="img-fluid" style="height: 90px;">
                                         </div>
-                                    
-                                        
-                                        
                                     </div>
                                 </div>
-                                <div class="apps-download mt-4"> 
+                                <div class="apps-download mt-4">
                                     <h3>Download the App</h3>
                                     <div class="download-btn">
-                                        <a href="#" class="app-store-btn">
+                                        <a href="https://apps.apple.com/in/app/paynback/id6751259946"
+                                            class="app-store-btn">
                                             <i class="fab fa-apple"></i>
                                             <span>Download on the</span>
                                             App Store
@@ -1087,7 +1161,7 @@
                                 </div>
                             </div>
                         </div>
-                      
+
                         <div class="col-lg-2 col-md-6 col-sm-12 footer-column">
                             <div class="links-widget footer-widget">
                                 <h4 class="widget-title">PayNback</h4>
@@ -1099,7 +1173,7 @@
                                         <li><a href="career.html">Careers</a></li>
                                         <li><a href="internship.html">Internships</a></li>
                                         <li><a href="refer.html">Refer & Earn</a></li>
-                                        <li><a href="contact.html">Contact Us</a></li>                                   
+                                        <li><a href="contact.html">Contact Us</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -1137,12 +1211,20 @@
                                     </ul>
                                 </div>
                                 <ul class="social-links clearfix">
-                                    <li><a href="https://www.facebook.com/people/Pay-N-Back/61559338322294/?mibextid=ZbWKwL"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="https://www.instagram.com/paynback_/?igsh=YzljYTk1ODg3Zg%3D%3D"><i class="fa-brands fa-instagram"></i></a></li>
-                                    <li><a href="https://x.com/pay_n_back?t=F9anwGepQxnEOcIY39a1yA&s=08"><i class="fa-brands fa-x-twitter"></i></a></li>
-                                    <li><a href="https://www.linkedin.com/search/results/all/?keywords=paynback&origin=SPELL_CHECK_REPLACE&sid=eBL&spellCorrectionEnabled=false"><i class="fab fa-linkedin-in"></i></a></li>
-                                    <li><a href="https://in.pinterest.com/paynback/"><i class="fa-brands fa-pinterest"></i></a></li>
-                                    <li><a href="https://www.youtube.com/@paynback-xl6zn"><i class="fa-brands fa-youtube"></i></a></li>
+                                    <li><a
+                                            href="https://www.facebook.com/people/Pay-N-Back/61559338322294/?mibextid=ZbWKwL"><i
+                                                class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="https://www.instagram.com/paynback_/?igsh=YzljYTk1ODg3Zg%3D%3D"><i
+                                                class="fa-brands fa-instagram"></i></a></li>
+                                    <li><a href="https://x.com/pay_n_back?t=F9anwGepQxnEOcIY39a1yA&s=08"><i
+                                                class="fa-brands fa-x-twitter"></i></a></li>
+                                    <li><a
+                                            href="https://www.linkedin.com/search/results/all/?keywords=paynback&origin=SPELL_CHECK_REPLACE&sid=eBL&spellCorrectionEnabled=false"><i
+                                                class="fab fa-linkedin-in"></i></a></li>
+                                    <li><a href="https://in.pinterest.com/paynback/"><i
+                                                class="fa-brands fa-pinterest"></i></a></li>
+                                    <li><a href="https://www.youtube.com/@paynback-xl6zn"><i
+                                                class="fa-brands fa-youtube"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -1248,7 +1330,7 @@
     <script src="js/config.js"></script>
 
 
-    
+
 
     <!-- jequery plugins -->
     <script src="js/jquery.js"></script>
