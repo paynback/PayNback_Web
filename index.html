@@ -66,6 +66,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     <!-- iOS and Android Mobile Fix for Zoom and White Space Issues -->
     <style>
+
+          .disabled {
+    pointer-events: none; /* Disables clicking */
+    cursor: default;       /* Prevents the 'pointer' hand icon */
+    color: #888;          /* Optional: makes it look greyed out */
+    text-decoration: none;
+}
+
+
         /* iOS-specific fixes to prevent zoom and white space */
         @supports (-webkit-touch-callout: none) {
             html {
@@ -190,11 +199,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <nav class="main-menu navbar-expand-md navbar-light">
                             <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                 <ul class="navigation clearfix">
-                                    <li class="current dropdown"><a href="index.html">Home</a></li>
-                                    <li class="dropdown"><a href="about.html">About Us</a> </li>
-                                    <li class="dropdown"><a href="career.html">Careers</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
-                                </ul>
+                                <li><a href="index.html">Home</a></li>
+
+                                <li class="dropdown">
+                                    <a href="#" class="disabled">Resources</a>
+                                    <ul>
+                                        <li><a href="blog.html">Blog</a></li>
+                                        <li><a href="product-overview.html" class="disabled">Product Overview</a></li>
+                                    </ul>
+                                </li>
+
+                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="career.html">Careers</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
                             </div>
                         </nav>
                     </div>

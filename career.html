@@ -59,6 +59,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </script>
 
 
+<style>
+     .disabled {
+    pointer-events: none; /* Disables clicking */
+    cursor: default;       /* Prevents the 'pointer' hand icon */
+    color: #888;          /* Optional: makes it look greyed out */
+    text-decoration: none;
+}
+</style>
+
 </head>
 
 
@@ -94,6 +103,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                 <ul class="navigation clearfix">
                                     <li class="dropdown"><a href="index.html">Home</a></li>
+
+
+                                    <li class="dropdown">
+                                    <a href="#" class="disabled">Resources</a>
+                                    <ul>
+                                        <li><a href="blog.html">Blog</a></li>
+                                        <li><a href="product-overview.html" class="disabled">Product Overview</a></li>
+                                    </ul>
+                                </li>
+                                
                                     <li class=" dropdown"><a href="about.html">About Us</a></li>
                                     <li class="dropdown current"><a href="career.html">Careers</a></li>
                                     <li class=" dropdown"><a href="contact.html">Contact</a></li>
