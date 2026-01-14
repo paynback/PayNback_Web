@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
     <title>PayNBack Blog | Cashback, UPI Rewards & Smart Payments in India</title>
 
     <meta name="description"
-          content="Explore PayNBack blogs on cashback meaning, UPI rewards, festive cashback offers, and smart digital payment tips in India.">
+        content="Explore PayNBack blogs on cashback meaning, UPI rewards, festive cashback offers, and smart digital payment tips in India.">
 
     <meta name="keywords"
-          content="cashback blog india, upi cashback, festive cashback offers, digital payments india, paynback blog">
+        content="cashback blog india, upi cashback, festive cashback offers, digital payments india, paynback blog">
 
     <link rel="canonical" href="/blog" />
 
@@ -41,33 +39,36 @@
     <!-- Microsoft Clarity for analyzing user interaction -->
 
     <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "uy6h030zmk");
-</script>
+        (function (c, l, a, r, i, t, y) {
+            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+        })(window, document, "clarity", "script", "uy6h030zmk");
+    </script>
 
 
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-NV35WSQ6');</script>
-<!-- End Google Tag Manager -->
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-NV35WSQ6');</script>
+    <!-- End Google Tag Manager -->
 
 
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S0033LD1BC"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S0033LD1BC"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-  gtag('config', 'G-S0033LD1BC');
-</script>
+        gtag('config', 'G-S0033LD1BC');
+    </script>
 
 
 
@@ -83,6 +84,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         main.container {
             padding: 80px 20px;
+            margin-top: 60px;
         }
 
         main h1 {
@@ -103,7 +105,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             background: #fff;
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
             transition: all 0.35s ease;
             display: flex;
             flex-direction: column;
@@ -111,7 +113,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         .blog-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 20px 45px rgba(0,0,0,0.12);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
         }
 
         .blog-image {
@@ -170,23 +172,39 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }
 
         @media (max-width: 768px) {
+            main.container {
+                padding: 60px 15px;
+                margin-top: 60px;
+            }
+
             main h1 {
                 font-size: 32px;
                 margin-bottom: 40px;
+            }
+
+            .blog-grid {
+                gap: 30px;
+            }
+
+            .blog-content {
+                padding: 24px 20px;
             }
         }
 
 
         .disabled {
-    pointer-events: none; /* Disables clicking */
-    cursor: default;       /* Prevents the 'pointer' hand icon */
-    color: #888;          /* Optional: makes it look greyed out */
-    text-decoration: none;
-}
+            pointer-events: none;
+            /* Disables clicking */
+            cursor: default;
+            /* Prevents the 'pointer' hand icon */
+            color: #888;
+            /* Optional: makes it look greyed out */
+            text-decoration: none;
+        }
 
 
 
-         /* iOS-specific fixes to prevent zoom and white space */
+        /* iOS-specific fixes to prevent zoom and white space */
         @supports (-webkit-touch-callout: none) {
             html {
                 -webkit-text-size-adjust: 100%;
@@ -273,24 +291,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 transform: translateZ(0);
             }
         }
-
-       
-
     </style>
 </head>
 
 <body class="boxed_wrapper">
 
     <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NV35WSQ6"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NV35WSQ6" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
-<!-- Preloader -->
-<div class="preloader"></div>
+    <!-- Preloader -->
+    <div class="preloader"></div>
 
-<!-- ================= HEADER ================= -->
- <!-- main header -->
+    <!-- ================= HEADER ================= -->
+    <!-- main header -->
     <header class="main-header home-1">
         <div class="outer-container">
             <div class="container">
@@ -309,18 +324,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <nav class="main-menu navbar-expand-md navbar-light">
                             <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
                                 <ul class="navigation clearfix">
-                                <li><a href="index.html">Home</a></li>
-                                <li class="dropdown">
-                                    <a href="#" class="disabled">Resources</a>
-                                    <ul>
-                                        <li><a href="blog.html">Blog</a></li>
-                                        <li><a href="product-overview.html" class="disabled">Product Overview</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="about.html">About Us</a></li>
-                                <li><a href="career.html">Careers</a></li>
-                                <li><a href="contact.html">Contact</a></li>
-                            </ul>
+                                    <li><a href="index.html">Home</a></li>
+                                    <li class="dropdown">
+                                        <a href="#" class="disabled">Resources</a>
+                                        <ul>
+                                            <li><a href="blog.html">Blog</a></li>
+                                            <li><a href="product-overview.html" class="disabled">Product Overview</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="about.html">About Us</a></li>
+                                    <li><a href="career.html">Careers</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                </ul>
                             </div>
                         </nav>
                     </div>
@@ -349,7 +365,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="close-btn"><i class="fas fa-times"></i></div>
 
         <nav class="menu-box">
-           
+
             <div class="nav-logo"><a href="index.html"><img src="images/PayNbackLogo512X254.png" width="100" height="49"
                         alt="PayNback Logo" title=""></a></div>
             <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
@@ -385,78 +401,104 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 
-<!-- ================= HEADER END ================= -->
+    <!-- ================= HEADER END ================= -->
 
-<!-- ================= BANNER ================= -->
-<section class="page-title" style="background-image: url(images/background/pagetitle-bg.png);">
-    <div class="anim-icons">
-        <div class="icon icon-1"><img src="images/icons/anim-icon-17.png" alt="Anime Icon 1"></div>
-        <div class="icon icon-2 rotate-me"><img src="images/icons/anim-icon-18.png" alt="Anime Icon 2"></div>
-        <div class="icon icon-3 rotate-me"><img src="images/icons/anim-icon-19.png" alt="Anime Icon 3"></div>
-    </div>
-    <div class="container">
-        <div class="content-box clearfix">
-            <div class="title-box pull-left">
-                <h1>Blogs</h1>
-                <p>Shop smarter, save more, and earn rewards with PayNback.</p>
-            </div>
-            <ul class="bread-crumb pull-right">
-                <li>Blog</li>
-                <li><a href="index.html">Home</a></li>
-            </ul>
+    <!-- ================= BANNER ================= -->
+    <section class="page-title" style="background-image: url(images/background/pagetitle-bg.png);">
+        <div class="anim-icons">
+            <div class="icon icon-1"><img src="images/icons/anim-icon-17.png" alt="Anime Icon 1"></div>
+            <div class="icon icon-2 rotate-me"><img src="images/icons/anim-icon-18.png" alt="Anime Icon 2"></div>
+            <div class="icon icon-3 rotate-me"><img src="images/icons/anim-icon-19.png" alt="Anime Icon 3"></div>
         </div>
-    </div>
-</section>
-<!-- ================= BANNER END ================= -->
-
-<!-- ================= BLOG LIST ================= -->
-<main class="container">
-    <!-- <h1>PayNback Blogs</h1> -->
-
-    <section class="blog-grid">
-
-        <article class="blog-card">
-            <div class="blog-image">
-                <img src="images/blog/nuraghies_952022_layout_14.jpg" alt="What is Cashback and How It Works in India">
-            </div>
-            <div class="blog-content">
-                <h2>What is Cashback & How it Works in India</h2>
-                <p>
-                    Learn what cashback means in India, how cashback works on UPI, apps, and QR payments,
-                    and how users can earn cashback smartly on daily transactions.
-                </p>
-                <div class="blog-meta">
-                    <time datetime="2025-12-12">Dec 12, 2025</time>
+        <div class="container">
+            <div class="content-box clearfix">
+                <div class="title-box pull-left">
+                    <h1>Blogs</h1>
+                    <p>Shop smarter, save more, and earn rewards with PayNback.</p>
                 </div>
-                <a class="read-more" href="what-is-cashback-how-it-works-india.html">Read More →</a>
+                <ul class="bread-crumb pull-right">
+                    <li>Blog</li>
+                    <li><a href="index.html">Home</a></li>
+                </ul>
             </div>
-        </article>
-
-        <article class="blog-card">
-            <div class="blog-image">
-                <img src="images/blog/blog content 2 image.png" alt="Best Cashback Offers During Festivals in India">
-            </div>
-            <div class="blog-content">
-                <h2>Best Cashback Offers During Festivals in India</h2>
-                <p>
-                    Discover the best festive cashback offers in India and learn how to maximize cashback
-                    on UPI payments, shopping, and bill payments during Diwali, Onam, and more.
-                </p>
-                <div class="blog-meta">
-                    <time datetime="2025-12-10">Dec 10, 2025</time>
-                </div>
-                <a class="read-more" href="best-cashback-offers-during-festivals-india.html">Read More →</a>
-            </div>
-        </article>
-
+        </div>
     </section>
-</main>
-<!-- ================= BLOG LIST END ================= -->
+    <!-- ================= BANNER END ================= -->
+
+    <!-- ================= BLOG LIST ================= -->
+    <main class="container">
+
+        <!--Section 1-->
+        <section class="blog-grid">
+
+            <article class="blog-card">
+                <div class="blog-image">
+                    <img src="images/blog/nuraghies_952022_layout_14.jpg"
+                        alt="What is Cashback and How It Works in India">
+                </div>
+                <div class="blog-content">
+                    <h2>What is Cashback & How it Works in India</h2>
+                    <p>
+                        Learn what cashback means in India, how cashback works on UPI, apps, and QR payments,
+                        and how users can earn cashback smartly on daily transactions.
+                    </p>
+                    <div class="blog-meta">
+                        <time datetime="2025-12-12">Dec 12, 2025</time>
+                    </div>
+                    <a class="read-more"
+                        href="what-is-cashback-how-it-works-india-cashback-meaning-cashback-apps-in-india-UPI-cashback-earn-cashback-on-payments-how-do-cashback-apps-work-cashback-on-UPI-payments-in-India-instantcashback-vs-delayed-cashback.html">
+                        Read More →
+                    </a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-image">
+                    <img src="images/blog/blog content 2 image.png"
+                        alt="Best Cashback Offers During Festivals in India">
+                </div>
+                <div class="blog-content">
+                    <h2>Best Cashback Offers During Festivals in India (UPI, Shopping & Bills) PayNBack</h2>
+                    <p>
+                        Discover the best festive cashback offers in India and learn how to maximize cashback
+                        on UPI payments, shopping, and bill payments during Diwali, Onam, and more.
+                    </p>
+                    <div class="blog-meta">
+                        <time datetime="2025-12-10">Dec 10, 2025</time>
+                    </div>
+                    <a class="read-more" 
+                    href="best-cashback-offers-during-festivals-in-India-festival-cashback-offers-festive-cashback-deals-Diwali-cashback-offers-UPI-cashback-during-festivals-how-to-earn-cashback-during-festivals-festive-season-cashback-apps-cashback-offers-on-UPI-payments.html">
+                        Read More →
+                    </a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-image">
+                    <img src="images/blog/paynback-pedia-dhamaka-cashback.jpg"
+                        alt="PayNback Pedia Dhamaka: Get ₹1000 Cashback & Celebrate Rewards">
+                </div>
+                <div class="blog-content">
+                    <h2>PayNback Pedia Dhamaka: Get ₹1000 Cashback & Celebrate Rewards</h2>
+                    <p>
+                        Join PayNback Pedia Dhamaka and get ₹1000 cashback per person. A live campaign designed to boost
+                        user rewards and brand visibility while celebrating smarter spending.
+                    </p>
+                    <div class="blog-meta">
+                        <time datetime="2025-12-08">Dec 8, 2025</time>
+                    </div>
+                    <a class="read-more" href="paynback-pedia-dhamaka-cashback-campaign.html">Read More →</a>
+                </div>
+            </article>
+
+        </section>
+    </main>
+    <!-- ================= BLOG LIST END ================= -->
 
 
- <!-- main-footer -->
+    <!-- main-footer -->
     <footer class="main-footer style-five style-six">
-        
+
         <div class="image-layer" style="background-image: url(images/icons/footer-bg-6.png);"></div>
         <div class="container">
             <div class="footer-top">
@@ -465,19 +507,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <div class="col-lg-4 col-md-6 col-sm-12 footer-column">
                             <div class="about-widget footer-widget">
                                 <figure class="footer-logo"><a href="index.html"><img
-                                            src="images/PayNbackLogo512X254.png" height="70" width="141" alt="PayNback Logo"></a>
+                                            src="images/PayNbackLogo512X254.png" height="70" width="141"
+                                            alt="PayNback Logo"></a>
                                 </figure>
                                 <div class="text">PayNback is India's first in-store shopping support app that offers
                                     rewards and discounts to consumers.</div>
 
                                 <div class="text-white">
                                     <h3>Certifications</h3>
-                                    <div class="certifications-container mt-4" style="display: flex; justify-content: flex-start; align-items: center; gap: 20px; max-width: 400px; margin: 0;">
-                                        <div class="certification-logo-container" style="background: white; padding: 16px 6px 0px 8px; border-radius: 10px; width: 120px; height: 70px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                    <div class="certifications-container mt-4"
+                                        style="display: flex; justify-content: flex-start; align-items: center; gap: 20px; max-width: 400px; margin: 0;">
+                                        <div class="certification-logo-container"
+                                            style="background: white; padding: 16px 6px 0px 8px; border-radius: 10px; width: 120px; height: 70px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                                             <img src="fonts/kerala-startup-mission.svg" alt="Kerala Startup Mission"
                                                 class="img-fluid" style="max-height: 90px; max-width: 125px;">
                                         </div>
-                                        <div class="certification-logo-container" style="background: white; padding: 12px 8px 0px 8px; border-radius: 10px; width: 120px; height: 70px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                        <div class="certification-logo-container"
+                                            style="background: white; padding: 12px 8px 0px 8px; border-radius: 10px; width: 120px; height: 70px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                                             <img src="fonts/startup-india-hub-seeklogo-2.svg" alt="Startup India Hub"
                                                 class="img-fluid" style="max-height: 90px; max-width: 115px;">
                                         </div>
@@ -577,9 +623,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </footer>
     <!-- main-footer end -->
 
-    
 
- <!--Scroll to top-->
+
+    <!--Scroll to top-->
     <button class="scroll-top scroll-to-target" data-target="html">
         <span class="fa fa-arrow-up"></span>
     </button>
@@ -644,4 +690,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </script>
 
 </body>
+
 </html>
