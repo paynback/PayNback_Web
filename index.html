@@ -162,6 +162,114 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 transform: translateZ(0);
             }
         }
+
+        /* ================= ENHANCED DROPDOWN MENU STYLING ================= */
+        .main-menu .navigation > li.dropdown > ul {
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
+            padding: 12px 0;
+            margin-top: 8px;
+            background: #fafafa;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            min-width: 220px;
+        }
+
+        .main-menu .navigation > li.dropdown > ul > li {
+            padding: 0 20px;
+            margin: 4px 0;
+        }
+
+        .main-menu .navigation > li.dropdown > ul > li > a {
+            padding: 12px 16px;
+            border-radius: 4px;
+            font-size: 15px;
+            font-weight: 400;
+            color: #2d3748;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .main-menu .navigation > li.dropdown > ul > li > a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 0;
+            background: linear-gradient(135deg, #5f5cff 0%, #3b3ae6 100%);
+            border-radius: 0 2px 2px 0;
+            transition: height 0.3s ease;
+        }
+
+        .main-menu .navigation > li.dropdown > ul > li > a:hover {
+            color: #5f5cff;
+            padding-left: 20px;
+        }
+
+        .main-menu .navigation > li.dropdown > ul > li > a:hover::before {
+            height: 60%;
+        }
+
+        .main-menu .navigation > li.dropdown > ul > li > a.disabled {
+            color: #a0aec0;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .main-menu .navigation > li.dropdown > ul > li > a.disabled:hover {
+            background-color: transparent;
+            padding-left: 16px;
+        }
+
+        .main-menu .navigation > li.dropdown > ul > li > a.disabled:hover::before {
+            height: 0;
+        }
+
+        /* Add icon spacing for dropdown items */
+        .main-menu .navigation > li.dropdown > ul > li > a i {
+            margin-right: 10px;
+            font-size: 14px;
+            width: 18px;
+            text-align: center;
+        }
+
+        /* Smooth dropdown animation */
+        .main-menu .navigation > li.dropdown:hover > ul {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Navigation link hover and active states */
+        .main-menu .navigation > li > a:not(.disabled) {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        /* Hover: keep text white */
+        .main-menu .navigation > li > a:not(.disabled):hover {
+            color: #fff;
+        }
+
+        /* Active state for current page - no color change */
+        .main-menu .navigation > li > a.active,
+        .main-menu .navigation > li.dropdown > ul > li > a.active {
+            font-weight: 600;
+        }
+
+        .main-menu .navigation > li.dropdown > ul > li > a.active::before {
+            height: 60%;
+        }
+
+        /* Allow active state on disabled Resources link */
+        .main-menu .navigation > li.dropdown > a.disabled.active {
+            font-weight: 600;
+            pointer-events: none;
+            cursor: default;
+        }
     </style>
 </head>
 
@@ -204,8 +312,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 <li class="dropdown">
                                     <a href="#" class="disabled">Resources</a>
                                     <ul>
-                                        <li><a href="blog.html">Blog</a></li>
-                                        <li><a href="product-overview.html" class="disabled">Product Overview</a></li>
+                                        <li><a href="blog.html"><i class="fas fa-blog"></i> Blog</a></li>
+                                        <li><a href="product-overview.html" class="disabled"><i class="fas fa-box"></i> Product Overview</a>
+                                        </li>
                                     </ul>
                                 </li>
 
@@ -1323,6 +1432,92 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- main-js -->
     <script src="js/script.js"></script>
+
+    <!-- Navigation Active State and Hover Effects -->
+    <script>
+        (function() {
+            // Get current page filename
+            var currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            // Handle case where pathname might be empty or just '/'
+            if (!currentPage || currentPage === '' || currentPage === '/') {
+                currentPage = 'index.html';
+            }
+            
+            // Function to check if link matches current page
+            function isCurrentPage(linkHref) {
+                if (!linkHref || linkHref === '#' || linkHref === '') return false;
+                var linkPage = linkHref.split('/').pop();
+                // Remove query strings and hashes
+                linkPage = linkPage.split('?')[0].split('#')[0];
+                var currentPageClean = currentPage.split('?')[0].split('#')[0];
+                return linkPage === currentPageClean || 
+                       (currentPageClean === '' && linkPage === 'index.html') ||
+                       (currentPageClean === 'index.html' && linkPage === 'index.html');
+            }
+            
+            // Function to apply active states
+            function applyActiveStates() {
+                // Find all navigation links (including sticky header)
+                var navLinks = document.querySelectorAll('.main-menu .navigation > li > a:not(.disabled)');
+                var dropdownLinks = document.querySelectorAll('.main-menu .navigation > li.dropdown > ul > li > a:not(.disabled)');
+                
+                // Check if current page is blog.html or product-overview.html
+                var currentPageClean = currentPage.split('?')[0].split('#')[0];
+                var isResourcesPage = currentPageClean === 'blog.html' || currentPageClean === 'product-overview.html';
+                
+                // Add active class to matching main navigation links
+                navLinks.forEach(function(link) {
+                    var href = link.getAttribute('href');
+                    if (isCurrentPage(href)) {
+                        link.classList.add('active');
+                    }
+                });
+                
+                // Add active class to matching dropdown links
+                dropdownLinks.forEach(function(link) {
+                    var href = link.getAttribute('href');
+                    if (isCurrentPage(href)) {
+                        link.classList.add('active');
+                        // Also highlight parent dropdown if child is active
+                        var parentDropdown = link.closest('.dropdown');
+                        if (parentDropdown) {
+                            var dropdownToggle = parentDropdown.querySelector('> a');
+                            if (dropdownToggle) {
+                                dropdownToggle.classList.add('active');
+                            }
+                        }
+                    }
+                });
+                
+                // Highlight Resources dropdown link if on blog.html or product-overview.html
+                if (isResourcesPage) {
+                    var resourcesLinks = document.querySelectorAll('.main-menu .navigation > li.dropdown > a.disabled');
+                    resourcesLinks.forEach(function(link) {
+                        // Check if this is the Resources link (has "Resources" text)
+                        var linkText = link.textContent.trim();
+                        if (linkText === 'Resources' || linkText.indexOf('Resources') !== -1) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            }
+            
+            // Apply immediately
+            applyActiveStates();
+            
+            // Re-apply after a short delay to catch dynamically loaded sticky header menu
+            setTimeout(applyActiveStates, 100);
+            setTimeout(applyActiveStates, 500);
+            
+            // Also apply when DOM is fully loaded
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', applyActiveStates);
+            } else {
+                // DOM already loaded, apply one more time
+                setTimeout(applyActiveStates, 200);
+            }
+        })();
+    </script>
 
     <!-- Android-only: prevent pinch/double-tap zoom and right-side whitespace shrink -->
     <script>

@@ -405,7 +405,7 @@
         /* Cover Image Container - Rounded top corners only */
         .article-cover-wrapper {
             width: 100%;
-            border-radius: 40px 40px 0 0;
+            border-radius: 12px 12px 0 0;
             overflow: hidden;
             margin-bottom: 2.5rem;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
@@ -427,7 +427,7 @@
 
         /* Force border-radius on wrapper - override any conflicting styles */
         main.container article .article-cover-wrapper {
-            border-radius: 40px 40px 0 0 !important;
+            border-radius: 12px 12px 0 0 !important;
             overflow: hidden !important;
         }
 
@@ -439,19 +439,43 @@
             line-height: 1.6;
         }
 
+        /* Back to blogs link */
+        .article-cover-back {
+            text-decoration: none;
+            color: #2d3748;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .article-cover-back:hover {
+            color: #3182ce;
+        }
+
+        .article-cover-back i {
+            margin-right: 6px;
+        }
+
         @media (max-width: 768px) {
             .article-cover-wrapper {
-                border-radius: 20px 20px 0 0 !important;
+                border-radius: 10px 10px 0 0 !important;
                 margin-bottom: 2rem;
             }
 
             main.container article .article-cover-wrapper {
-                border-radius: 20px 20px 0 0 !important;
+                border-radius: 10px 10px 0 0 !important;
             }
 
             .page-title .title-box p {
                 font-size: 16px;
                 margin-top: 12px;
+            }
+
+            .article-cover-back {
+                margin-bottom: 1.5rem;
+                font-size: 14px;
             }
         }
     </style>
@@ -559,14 +583,15 @@
 
         <article class="content-visible">
 
+            <a href="blog.html" class="article-cover-back">
+                <i class="fa-solid fa-arrow-left-long"></i> Back to blogs
+            </a>
+
             <div class="article-cover-wrapper rounded-top">
                 <img src="images/blog/blog-1-cover.jpg" 
                      alt="What is Cashback and How it Works in India - PayNBack" 
                      class="article-cover-image">
             </div>
-
-            <a href="blog.html" style="text-decoration: none;"><i class="fa-solid fa-arrow-left-long"
-                    style="margin-right: 5px;"></i> Back to blogs</a>
             <p class="important-note">
                 Cashback has become one of the most popular ways for Indians to save money on everyday spending,
                 from tea shop payments to online shopping and bill payments.
