@@ -424,11 +424,30 @@
             overflow: hidden !important;
         }
 
+        /* SEO-optimized heading styles for page-title banner - Override all default styles */
+        section.page-title .title-box h1,
+        .page-title .title-box h1,
+        section.page-title h1 {
+            font-family: 'Times New Roman', Times, serif !important;
+            font-size: 48px !important;
+            font-weight: 700 !important;
+            color: #ffffff !important;
+            line-height: 1.2 !important;
+            margin: 0 0 30px 0 !important;
+            padding: 0 !important;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.25) !important;
+            letter-spacing: -0.8px !important;
+            text-transform: none !important;
+            text-align: left !important;
+            display: block !important;
+        }
+
         /* Banner description styling */
         .page-title .title-box p {
             color: #fff;
             font-size: 18px;
-            margin-top: 15px;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
             line-height: 1.6;
         }
 
@@ -461,9 +480,21 @@
                 border-radius: 10px 10px 0 0 !important;
             }
 
+            section.page-title .title-box h1,
+            .page-title .title-box h1,
+            section.page-title h1 {
+                font-family: 'Times New Roman', Times, serif !important;
+                font-size: 32px !important;
+                line-height: 1.3 !important;
+                letter-spacing: -0.5px !important;
+                font-weight: 700 !important;
+                margin-bottom: 30px !important;
+            }
+
             .page-title .title-box p {
                 font-size: 16px;
-                margin-top: 12px;
+                margin-top: 0 !important;
+                margin-bottom: 0 !important;
             }
 
             .article-cover-back {
