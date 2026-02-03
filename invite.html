@@ -129,102 +129,31 @@
             }
             
             // Function to copy to clipboard
-            // Uses execCommand for mobile (no permission popup) and modern API for desktop
+            // Uses modern Clipboard API for mobile (shows permission popup but more reliable)
+            // Falls back to execCommand if Clipboard API fails
             async function copyToClipboard(text) {
                 try {
                     // For mobile devices (iOS/Android), use execCommand directly to avoid permission popup
                     const isMobile = isIOS() || isAndroid();
                     
                     if (isMobile) {
-                        // For mobile devices, use execCommand directly to avoid permission popup
-                        // Modern Clipboard API shows permission popup on mobile - we skip it entirely
-                        // execCommand works without permission popup on mobile browsers
-                        
-                        // execCommand with textarea in viewport (required for Android Chrome)
-                        const textArea = document.createElement('textarea');
-                        textArea.value = text;
-                        
-                        // Android Chrome requires element to be in viewport (not off-screen)
-                        // Make it invisible but within viewport bounds
-                        textArea.style.position = 'fixed';
-                        textArea.style.left = '0';
-                        textArea.style.top = '0';
-                        textArea.style.width = '2px';
-                        textArea.style.height = '2px';
-                        textArea.style.opacity = '0';
-                        textArea.style.border = 'none';
-                        textArea.style.padding = '0';
-                        textArea.style.margin = '0';
-                        textArea.style.outline = 'none';
-                        textArea.style.overflow = 'hidden';
-                        textArea.style.zIndex = '-9999';
-                        textArea.style.backgroundColor = 'transparent';
-                        // Important: Do NOT use pointer-events: none - Android Chrome needs it focusable
-                        textArea.setAttribute('aria-hidden', 'true');
-                        textArea.setAttribute('readonly', 'readonly'); // Some Android versions need this
-                        
-                        document.body.appendChild(textArea);
-                        
-                        // Wait for DOM to update
-                        await new Promise(resolve => setTimeout(resolve, 50));
-                        
-                        if (isIOS()) {
-                            // iOS specific handling
-                            textArea.contentEditable = 'true';
-                            textArea.readOnly = false;
-                            textArea.focus();
-                            
-                            const range = document.createRange();
-                            range.selectNodeContents(textArea);
-                            const selection = window.getSelection();
-                            if (selection) {
-                                selection.removeAllRanges();
-                                selection.addRange(range);
+                        // Use modern Clipboard API for mobile devices
+                        // Note: This will show a permission popup, but it's the most reliable method
+                        if (navigator.clipboard && navigator.clipboard.writeText) {
+                            try {
+                                await navigator.clipboard.writeText(text);
+                                console.log('✅ Copied using modern Clipboard API (mobile)');
+                                return true;
+                            } catch (err) {
+                                console.error('Modern Clipboard API failed on mobile:', err);
+                                // Fallback to execCommand if modern API fails
+                                return await copyToClipboardMobileFallback(text);
                             }
-                            textArea.setSelectionRange(0, text.length);
                         } else {
-                            // Android Chrome - must focus and select properly
-                            textArea.focus();
-                            
-                            // Multiple selection methods for Android Chrome compatibility
-                            textArea.select();
-                            textArea.setSelectionRange(0, text.length);
-                            
-                            // Also try selecting via range for better compatibility
-                            const range = document.createRange();
-                            range.selectNodeContents(textArea);
-                            const selection = window.getSelection();
-                            if (selection) {
-                                selection.removeAllRanges();
-                                selection.addRange(range);
-                            }
+                            // If Clipboard API not available, use fallback
+                            console.log('Clipboard API not available, using fallback');
+                            return await copyToClipboardMobileFallback(text);
                         }
-                        
-                        // Wait for selection to complete
-                        await new Promise(resolve => setTimeout(resolve, 50));
-                        
-                        // Execute copy command
-                        let successful = false;
-                        try {
-                            successful = document.execCommand('copy');
-                            if (successful) {
-                                console.log('✅ Copied using execCommand');
-                            } else {
-                                console.warn('execCommand returned false');
-                            }
-                        } catch (err) {
-                            console.error('execCommand copy failed:', err);
-                        }
-                        
-                        // Clean up
-                        document.body.removeChild(textArea);
-                        
-                        // If execCommand failed, try one more method for Android
-                        if (!successful && isAndroid()) {
-                            return await copyToClipboardAndroidFallback(text);
-                        }
-                        
-                        return successful;
                     } else {
                         // For desktop browsers, try modern API first, then fallback
                         if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -246,49 +175,54 @@
                 }
             }
             
-            // Android-specific fallback method
-            async function copyToClipboardAndroidFallback(text) {
+            // Mobile fallback method (execCommand) - used when Clipboard API fails
+            async function copyToClipboardMobileFallback(text) {
                 try {
-                    // Try with input element instead of textarea (sometimes works better on Android)
-                    const input = document.createElement('input');
-                    input.type = 'text';
-                    input.value = text;
+                    const textArea = document.createElement('textarea');
+                    textArea.value = text;
                     
-                    // Position in viewport but invisible
-                    input.style.position = 'fixed';
-                    input.style.left = '0';
-                    input.style.top = '0';
-                    input.style.width = '1px';
-                    input.style.height = '1px';
-                    input.style.opacity = '0';
-                    input.style.border = 'none';
-                    input.style.padding = '0';
-                    input.style.margin = '0';
-                    input.style.outline = 'none';
-                    input.style.zIndex = '-9999';
-                    input.setAttribute('readonly', 'readonly');
+                    // Position in viewport but invisible (required for mobile browsers)
+                    textArea.style.position = 'fixed';
+                    textArea.style.left = '0';
+                    textArea.style.top = '0';
+                    textArea.style.width = '2px';
+                    textArea.style.height = '2px';
+                    textArea.style.opacity = '0';
+                    textArea.style.border = 'none';
+                    textArea.style.padding = '0';
+                    textArea.style.margin = '0';
+                    textArea.style.outline = 'none';
+                    textArea.style.overflow = 'hidden';
+                    textArea.style.zIndex = '-9999';
+                    textArea.style.backgroundColor = 'transparent';
+                    textArea.setAttribute('readonly', 'readonly');
+                    textArea.setAttribute('aria-hidden', 'true');
                     
-                    document.body.appendChild(input);
+                    document.body.appendChild(textArea);
                     await new Promise(resolve => setTimeout(resolve, 50));
                     
-                    input.focus();
-                    input.select();
-                    input.setSelectionRange(0, text.length);
+                    textArea.focus();
+                    textArea.select();
+                    if (textArea.setSelectionRange) {
+                        textArea.setSelectionRange(0, text.length);
+                    }
                     
                     await new Promise(resolve => setTimeout(resolve, 50));
                     
                     try {
                         const successful = document.execCommand('copy');
-                        document.body.removeChild(input);
+                        document.body.removeChild(textArea);
                         if (successful) {
-                            console.log('✅ Copied using Android fallback (input)');
+                            console.log('✅ Copied using mobile fallback (execCommand)');
                         }
                         return successful;
                     } catch (err) {
-                        document.body.removeChild(input);
+                        console.error('Mobile fallback copy failed:', err);
+                        document.body.removeChild(textArea);
                         return false;
                     }
                 } catch (err) {
+                    console.error('Mobile fallback error:', err);
                     return false;
                 }
             }
