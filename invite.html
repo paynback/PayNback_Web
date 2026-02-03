@@ -129,28 +129,58 @@
             }
             
             // Function to copy to clipboard
+            // Uses execCommand for mobile (no permission popup) and modern API for desktop
             async function copyToClipboard(text) {
                 try {
-                    if (navigator.clipboard && navigator.clipboard.writeText) {
-                        await navigator.clipboard.writeText(text);
-                        return true;
-                    } else {
-                        // Fallback for older browsers
+                    // For mobile devices (iOS/Android), use execCommand directly to avoid permission popup
+                    const isMobile = isIOS() || isAndroid();
+                    
+                    if (isMobile) {
+                        // Use execCommand method for mobile - no permission popup
                         const textArea = document.createElement('textarea');
                         textArea.value = text;
                         textArea.style.position = 'fixed';
                         textArea.style.left = '-999999px';
                         textArea.style.top = '-999999px';
+                        textArea.setAttribute('readonly', '');
                         document.body.appendChild(textArea);
-                        textArea.focus();
-                        textArea.select();
+                        
+                        // For iOS, we need to select the text differently
+                        if (isIOS()) {
+                            const range = document.createRange();
+                            range.selectNodeContents(textArea);
+                            const selection = window.getSelection();
+                            if (selection) {
+                                selection.removeAllRanges();
+                                selection.addRange(range);
+                            }
+                            textArea.setSelectionRange(0, 999999);
+                        } else {
+                            textArea.focus();
+                            textArea.select();
+                        }
+                        
                         try {
-                            document.execCommand('copy');
+                            const successful = document.execCommand('copy');
                             document.body.removeChild(textArea);
-                            return true;
+                            return successful;
                         } catch (err) {
                             document.body.removeChild(textArea);
                             return false;
+                        }
+                    } else {
+                        // For desktop browsers, try modern API first, then fallback
+                        if (navigator.clipboard && navigator.clipboard.writeText) {
+                            try {
+                                await navigator.clipboard.writeText(text);
+                                return true;
+                            } catch (err) {
+                                // If modern API fails, use fallback
+                                return copyToClipboardFallback(text);
+                            }
+                        } else {
+                            // Use fallback for older desktop browsers
+                            return copyToClipboardFallback(text);
                         }
                     }
                 } catch (err) {
@@ -159,18 +189,40 @@
                 }
             }
             
+            // Fallback method for clipboard copy
+            function copyToClipboardFallback(text) {
+                try {
+                    const textArea = document.createElement('textarea');
+                    textArea.value = text;
+                    textArea.style.position = 'fixed';
+                    textArea.style.left = '-999999px';
+                    textArea.style.top = '-999999px';
+                    document.body.appendChild(textArea);
+                    textArea.focus();
+                    textArea.select();
+                    try {
+                        const successful = document.execCommand('copy');
+                        document.body.removeChild(textArea);
+                        return successful;
+                    } catch (err) {
+                        document.body.removeChild(textArea);
+                        return false;
+                    }
+                } catch (err) {
+                    return false;
+                }
+            }
+            
             // Main function
             async function handleReferral() {
-                if (!referralCode) {
-                    console.error('Invalid referral link. Please check the link and try again.')
+
+                if(referralCode) {
+                    const copied = await copyToClipboard(referralCode);
+                    if (!copied) {
+                        console.warn('Failed to copy referral code to clipboard');
+                    }
                 }
-                
                 // Copy referral code to clipboard
-                const copied = await copyToClipboard(referralCode);
-                if (!copied) {
-                    console.warn('Failed to copy referral code to clipboard');
-                }
-                
                 // Determine redirect URL based on device
                 let redirectUrl;
                 if (isIOS()) {
