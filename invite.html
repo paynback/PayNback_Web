@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    
+    <title>Join PayNback - Get Rewarded!</title>
+    
+    <!-- Fav Icon -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Ubuntu', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .invite-container {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .logo {
+            margin-bottom: 30px;
+        }
+        
+        .logo img {
+            max-width: 200px;
+            height: auto;
+        }
+        
+        .loading-text {
+            font-size: 18px;
+            margin-top: 20px;
+            opacity: 0.9;
+        }
+        
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid white;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .error-message {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="invite-container">
+        <div class="logo">
+            <img src="images/PayNbackLogo512X254.png" alt="PayNback Logo">
+        </div>
+        <div class="spinner"></div>
+        <div class="loading-text">Redirecting you to the store...</div>
+        <div id="error-message" class="error-message" style="display: none;"></div>
+    </div>
+
+    <script>
+        (function() {
+            // Get referral code and role from URL query parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const referralCode = urlParams.get('code');
+            const role = urlParams.get('role') || 'user'; // Default to 'user' if not specified
+            
+            // App Store URLs based on role
+            // IMPORTANT: Update these values with your actual app package names and App Store IDs
+            // These should match the values in your server .env file:
+            // - USER_ANDROID_PACKAGE_NAME / MERCHANT_ANDROID_PACKAGE_NAME
+            // - USER_IOS_APP_ID / MERCHANT_IOS_APP_ID
+            const APP_CONFIG = {
+                user: {
+                    android: 'com.paynback.userapp', // TODO: Replace with actual USER_ANDROID_PACKAGE_NAME from .env
+                    ios: '6751259946' // TODO: Replace with actual USER_IOS_APP_ID from .env
+                },
+                merchant: {
+                    android: 'com.paynback.paynback_business', // TODO: Replace with actual MERCHANT_ANDROID_PACKAGE_NAME from .env
+                    ios: '6749880274' // TODO: Replace with actual MERCHANT_IOS_APP_ID from .env
+                }
+            };
+            
+            // Get app config based on role
+            const appConfig = APP_CONFIG[role] || APP_CONFIG.user;
+            
+            // Play Store URL
+            const PLAY_STORE_URL = `https://play.google.com/store/apps/details?id=${appConfig.android}`;
+            
+            // App Store URL
+            const APP_STORE_URL = `https://apps.apple.com/app/id${appConfig.ios}`;
+            
+            // Function to detect iOS
+            function isIOS() {
+                return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            }
+            
+            // Function to detect Android
+            function isAndroid() {
+                return /Android/.test(navigator.userAgent);
+            }
+            
+            // Function to copy to clipboard
+            async function copyToClipboard(text) {
+                try {
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        await navigator.clipboard.writeText(text);
+                        return true;
+                    } else {
+                        // Fallback for older browsers
+                        const textArea = document.createElement('textarea');
+                        textArea.value = text;
+                        textArea.style.position = 'fixed';
+                        textArea.style.left = '-999999px';
+                        textArea.style.top = '-999999px';
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        try {
+                            document.execCommand('copy');
+                            document.body.removeChild(textArea);
+                            return true;
+                        } catch (err) {
+                            document.body.removeChild(textArea);
+                            return false;
+                        }
+                    }
+                } catch (err) {
+                    console.error('Failed to copy to clipboard:', err);
+                    return false;
+                }
+            }
+            
+            // Main function
+            async function handleReferral() {
+                if (!referralCode) {
+                    console.error('Invalid referral link. Please check the link and try again.')
+                }
+                
+                // Copy referral code to clipboard
+                const copied = await copyToClipboard(referralCode);
+                if (!copied) {
+                    console.warn('Failed to copy referral code to clipboard');
+                }
+                
+                // Determine redirect URL based on device
+                let redirectUrl;
+                if (isIOS()) {
+                    redirectUrl = APP_STORE_URL;
+                } else if (isAndroid()) {
+                    redirectUrl = PLAY_STORE_URL;
+                } else {
+                    // Desktop or unknown device - redirect to Play Store by default
+                    redirectUrl = PLAY_STORE_URL;
+                }
+                
+                // Small delay to ensure clipboard copy completes
+                setTimeout(() => {
+                    window.location.href = redirectUrl;
+                }, 500);
+            }
+            
+            // Show error message
+            function showError(message) {
+                const errorDiv = document.getElementById('error-message');
+                errorDiv.textContent = message;
+                errorDiv.style.display = 'block';
+                document.querySelector('.spinner').style.display = 'none';
+                document.querySelector('.loading-text').textContent = '';
+            }
+            
+            // Execute on page load
+            handleReferral();
+        })();
+    </script>
+</body>
+</html>
+
