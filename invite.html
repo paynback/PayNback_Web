@@ -139,14 +139,32 @@
                         // Use execCommand method for mobile - no permission popup
                         const textArea = document.createElement('textarea');
                         textArea.value = text;
+                        
+                        // Make textarea completely invisible and hidden
                         textArea.style.position = 'fixed';
-                        textArea.style.left = '-999999px';
-                        textArea.style.top = '-999999px';
+                        textArea.style.left = '0';
+                        textArea.style.top = '0';
+                        textArea.style.width = '1px';
+                        textArea.style.height = '1px';
+                        textArea.style.opacity = '0';
+                        textArea.style.pointerEvents = 'none';
+                        textArea.style.border = 'none';
+                        textArea.style.padding = '0';
+                        textArea.style.margin = '0';
+                        textArea.style.outline = 'none';
+                        textArea.style.overflow = 'hidden';
+                        textArea.style.clip = 'rect(0, 0, 0, 0)';
+                        textArea.style.clipPath = 'inset(50%)';
                         textArea.setAttribute('readonly', '');
+                        textArea.setAttribute('aria-hidden', 'true');
+                        textArea.setAttribute('tabindex', '-1');
+                        
                         document.body.appendChild(textArea);
                         
                         // For iOS, we need to select the text differently
                         if (isIOS()) {
+                            textArea.contentEditable = 'true';
+                            textArea.readOnly = false;
                             const range = document.createRange();
                             range.selectNodeContents(textArea);
                             const selection = window.getSelection();
@@ -154,10 +172,13 @@
                                 selection.removeAllRanges();
                                 selection.addRange(range);
                             }
-                            textArea.setSelectionRange(0, 999999);
+                            textArea.setSelectionRange(0, text.length);
+                            textArea.contentEditable = 'false';
                         } else {
+                            // Android
                             textArea.focus();
                             textArea.select();
+                            textArea.setSelectionRange(0, text.length);
                         }
                         
                         try {
@@ -194,12 +215,31 @@
                 try {
                     const textArea = document.createElement('textarea');
                     textArea.value = text;
+                    
+                    // Make textarea completely invisible and hidden
                     textArea.style.position = 'fixed';
-                    textArea.style.left = '-999999px';
-                    textArea.style.top = '-999999px';
+                    textArea.style.left = '0';
+                    textArea.style.top = '0';
+                    textArea.style.width = '1px';
+                    textArea.style.height = '1px';
+                    textArea.style.opacity = '0';
+                    textArea.style.pointerEvents = 'none';
+                    textArea.style.border = 'none';
+                    textArea.style.padding = '0';
+                    textArea.style.margin = '0';
+                    textArea.style.outline = 'none';
+                    textArea.style.overflow = 'hidden';
+                    textArea.style.clip = 'rect(0, 0, 0, 0)';
+                    textArea.style.clipPath = 'inset(50%)';
+                    textArea.setAttribute('readonly', '');
+                    textArea.setAttribute('aria-hidden', 'true');
+                    textArea.setAttribute('tabindex', '-1');
+                    
                     document.body.appendChild(textArea);
                     textArea.focus();
                     textArea.select();
+                    textArea.setSelectionRange(0, text.length);
+                    
                     try {
                         const successful = document.execCommand('copy');
                         document.body.removeChild(textArea);
@@ -222,6 +262,8 @@
                         console.warn('Failed to copy referral code to clipboard');
                     }
                 }
+
+
                 // Copy referral code to clipboard
                 // Determine redirect URL based on device
                 let redirectUrl;
