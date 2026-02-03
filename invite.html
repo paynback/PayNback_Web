@@ -83,6 +83,10 @@
         </div>
         <div class="spinner"></div>
         <div class="loading-text">Redirecting you to the store...</div>
+        <div id="permission-hint" class="error-message" style="display: none; background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.3);">
+            <strong>📋 Action Required:</strong><br>
+            Please click <strong>"Allow"</strong> or <strong>"Paste"</strong> when the browser asks for clipboard permission.
+        </div>
         <div id="error-message" class="error-message" style="display: none;"></div>
     </div>
 
@@ -128,44 +132,116 @@
                 return /Android/.test(navigator.userAgent);
             }
             
+            // Helper function to update loading message
+            function updateLoadingMessage(message) {
+                const loadingText = document.querySelector('.loading-text');
+                if (loadingText) {
+                    loadingText.textContent = message;
+                }
+            }
+            
             // Function to copy to clipboard
-            // Uses modern Clipboard API for mobile (shows permission popup but more reliable)
-            // Falls back to execCommand if Clipboard API fails
+            // Uses modern Clipboard API (works reliably, shows permission popup)
             async function copyToClipboard(text) {
                 try {
-                    // For mobile devices (iOS/Android), use execCommand directly to avoid permission popup
                     const isMobile = isIOS() || isAndroid();
                     
                     if (isMobile) {
-                        // Use modern Clipboard API for mobile devices
-                        // Note: This will show a permission popup, but it's the most reliable method
+                        // Use modern Clipboard API for mobile - most reliable method
                         if (navigator.clipboard && navigator.clipboard.writeText) {
                             try {
+                                // Show user-friendly message before permission popup
+                                updateLoadingMessage('Please allow clipboard access to copy your referral code...');
+                                
+                                // Show permission hint
+                                const hint = document.getElementById('permission-hint');
+                                if (hint) {
+                                    hint.style.display = 'block';
+                                }
+                                
+                                // Small delay to show message before popup
+                                await new Promise(resolve => setTimeout(resolve, 300));
+                                
                                 await navigator.clipboard.writeText(text);
                                 console.log('✅ Copied using modern Clipboard API (mobile)');
+                                
+                                // Hide hint and show success
+                                if (hint) {
+                                    hint.style.display = 'none';
+                                }
+                                updateLoadingMessage('Code copied! Redirecting...');
                                 return true;
                             } catch (err) {
                                 console.error('Modern Clipboard API failed on mobile:', err);
-                                // Fallback to execCommand if modern API fails
+                                
+                                // Hide hint
+                                const hint = document.getElementById('permission-hint');
+                                if (hint) {
+                                    hint.style.display = 'none';
+                                }
+                                
+                                // Check if user denied permission
+                                if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+                                    updateLoadingMessage('Clipboard access was denied.');
+                                    showError('Please allow clipboard access and refresh the page to try again.');
+                                    return false;
+                                }
+                                
+                                // Other errors - try fallback
                                 return await copyToClipboardMobileFallback(text);
                             }
                         } else {
-                            // If Clipboard API not available, use fallback
+                            // Clipboard API not available
                             console.log('Clipboard API not available, using fallback');
                             return await copyToClipboardMobileFallback(text);
                         }
                     } else {
-                        // For desktop browsers, try modern API first, then fallback
+                        // Desktop - use Clipboard API with same UX improvements
                         if (navigator.clipboard && navigator.clipboard.writeText) {
                             try {
+                                // Show user-friendly message before permission popup (if needed)
+                                updateLoadingMessage('Copying referral code to clipboard...');
+                                
+                                // Show permission hint (desktop may also show popup)
+                                const hint = document.getElementById('permission-hint');
+                                if (hint) {
+                                    hint.style.display = 'block';
+                                }
+                                
+                                // Small delay to show message before popup (if any)
+                                await new Promise(resolve => setTimeout(resolve, 200));
+                                
                                 await navigator.clipboard.writeText(text);
+                                console.log('✅ Copied using modern Clipboard API (desktop)');
+                                
+                                // Hide hint and show success
+                                if (hint) {
+                                    hint.style.display = 'none';
+                                }
+                                updateLoadingMessage('Code copied! Redirecting...');
                                 return true;
                             } catch (err) {
-                                // If modern API fails, use fallback
+                                console.error('Modern Clipboard API failed on desktop:', err);
+                                
+                                // Hide hint
+                                const hint = document.getElementById('permission-hint');
+                                if (hint) {
+                                    hint.style.display = 'none';
+                                }
+                                
+                                // Check if user denied permission
+                                if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+                                    updateLoadingMessage('Clipboard access was denied.');
+                                    showError('Please allow clipboard access and refresh the page to try again.');
+                                    return false;
+                                }
+                                
+                                // Other errors - try fallback
                                 return copyToClipboardFallback(text);
                             }
                         } else {
-                            // Use fallback for older desktop browsers
+                            // Clipboard API not available - use fallback
+                            console.log('Clipboard API not available, using fallback');
                             return copyToClipboardFallback(text);
                         }
                     }
@@ -271,12 +347,23 @@
             
             // Main function
             async function handleReferral() {
+                if (!referralCode) {
+                    showError('Invalid referral link. Please check the link and try again.');
+                    return;
+                }
 
-                if(referralCode) {
-                    const copied = await copyToClipboard(referralCode);
-                    if (!copied) {
-                        console.warn('Failed to copy referral code to clipboard');
-                    }
+                // Update message to prepare user for permission popup
+                updateLoadingMessage('Preparing your referral code...');
+                
+                // Small delay before attempting copy
+                await new Promise(resolve => setTimeout(resolve, 200));
+                
+                const copied = await copyToClipboard(referralCode);
+                
+                if (!copied) {
+                    console.warn('Failed to copy referral code to clipboard');
+                    // Don't redirect if copy failed - let user see the error
+                    return;
                 }
 
                 // Determine redirect URL based on device
@@ -290,9 +377,8 @@
                     redirectUrl = PLAY_STORE_URL;
                 }
                 
-                // Longer delay for mobile to ensure clipboard copy completes
-                // Mobile browsers need more time for clipboard operations
-                const delay = isIOS() || isAndroid() ? 1000 : 500;
+                // Longer delay for mobile to ensure clipboard copy completes and user sees success
+                const delay = isIOS() || isAndroid() ? 1500 : 500;
                 setTimeout(() => {
                     window.location.href = redirectUrl;
                 }, delay);
