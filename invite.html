@@ -160,7 +160,7 @@
                                 }
                                 
                                 // Small delay to show message before popup
-                                await new Promise(resolve => setTimeout(resolve, 300));
+                                await new Promise(resolve => setTimeout(resolve, 150));
                                 
                                 await navigator.clipboard.writeText(text);
                                 console.log('✅ Copied using modern Clipboard API (mobile)');
@@ -209,7 +209,7 @@
                                 }
                                 
                                 // Small delay to show message before popup (if any)
-                                await new Promise(resolve => setTimeout(resolve, 200));
+                                await new Promise(resolve => setTimeout(resolve, 100));
                                 
                                 await navigator.clipboard.writeText(text);
                                 console.log('✅ Copied using modern Clipboard API (desktop)');
@@ -356,7 +356,7 @@
                 updateLoadingMessage('Preparing your referral code...');
                 
                 // Small delay before attempting copy
-                await new Promise(resolve => setTimeout(resolve, 200));
+                await new Promise(resolve => setTimeout(resolve, 100));
                 
                 const copied = await copyToClipboard(referralCode);
                 
@@ -377,8 +377,9 @@
                     redirectUrl = PLAY_STORE_URL;
                 }
                 
-                // Longer delay for mobile to ensure clipboard copy completes and user sees success
-                const delay = isIOS() || isAndroid() ? 1500 : 500;
+                // Reduced delay - clipboard copy is already complete, redirect immediately
+                // Small delay just to show success message briefly
+                const delay = isIOS() || isAndroid() ? 300 : 200;
                 setTimeout(() => {
                     window.location.href = redirectUrl;
                 }, delay);
