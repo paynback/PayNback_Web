@@ -27,7 +27,7 @@
     <link href="css/imagebg.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/f7489ab238.js" crossorigin="anonymous"></script>
+    <script defer src="https://kit.fontawesome.com/f7489ab238.js" crossorigin="anonymous"></script>
 
 
 
@@ -35,32 +35,50 @@
     <!-- Microsoft Clarity for analyzing user interaction -->
 
     <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "uy6h030zmk");
+    window.addEventListener('load', function() {
+        setTimeout(function() {
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "uy6h030zmk");
+        }, 3000);
+    });
 </script>
 
 
 <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-NV35WSQ6');</script>
+<script>
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-NV35WSQ6');
+    }, 3000);
+});
+</script>
 <!-- End Google Tag Manager -->
 
 
 
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-S0033LD1BC"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-S0033LD1BC');
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-S0033LD1BC';
+        document.head.appendChild(script);
+        
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', 'G-S0033LD1BC');
+    }, 3000);
+});
 </script>
 
 
@@ -1413,25 +1431,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="fa fa-arrow-up"></span>
     </button>
 
-    <script src="js/config.js"></script>
+    <script defer src="js/config.js"></script>
 
 
 
 
     <!-- jequery plugins -->
-    <script src="js/jquery.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/owl.js"></script>
-    <script src="js/wow.js"></script>
-    <script src="js/validation.js"></script>
-    <script src="js/jquery.fancybox.js"></script>
-    <script src="js/appear.js"></script>
-    <script src="js/scrollbar.js"></script>
-    <script src="js/tilt.jquery.js"></script>
+    <script defer src="js/jquery.js"></script>
+    <script defer src="js/popper.min.js"></script>
+    <script defer src="js/bootstrap.min.js"></script>
+    <script defer src="js/owl.js"></script>
+    <script defer src="js/wow.js"></script>
+    <script defer src="js/validation.js"></script>
+    <script defer src="js/jquery.fancybox.js"></script>
+    <script defer src="js/appear.js"></script>
+    <script defer src="js/scrollbar.js"></script>
+    <script defer src="js/tilt.jquery.js"></script>
 
     <!-- main-js -->
-    <script src="js/script.js"></script>
+    <script defer src="js/script.js"></script>
 
     <!-- Navigation Active State and Hover Effects -->
     <script>
