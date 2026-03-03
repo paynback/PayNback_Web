@@ -63,26 +63,65 @@
 
 	//Mobile Nav Hide Show
 	if($('.mobile-menu').length){
-		
-		$('.mobile-menu .menu-box').mCustomScrollbar();
-		
-		var mobileMenuContent = $('.main-header .menu-area .main-menu').html();
-		$('.mobile-menu .menu-box .menu-outer').append(mobileMenuContent);
-		$('.sticky-header .main-menu').append(mobileMenuContent);
-		
-		//Dropdown Button
-		$('.mobile-menu li.dropdown .dropdown-btn').on('click', function() {
-			$(this).toggleClass('open');
-			$(this).prev('ul').slideToggle(500);
-		});
-		//Menu Toggle Btn
+		var mobileMenuInitialized = false;
+		var stickyMenuInitialized = false;
+
+		function initMobileMenu() {
+			if (mobileMenuInitialized) return;
+			mobileMenuInitialized = true;
+
+			var mobileMenuContent = $('.main-header .menu-area .main-menu').html();
+			$('.mobile-menu .menu-box .menu-outer').append(mobileMenuContent);
+
+			// Ensure custom scrollbar only loads when mobile menu is actually used (reduces TBT).
+			var ensureScrollbar = function () {
+				if ($.fn.mCustomScrollbar) {
+					$('.mobile-menu .menu-box').mCustomScrollbar();
+					return Promise.resolve();
+				}
+				return loadScriptOnce('js/scrollbar.js', function () { return !!$.fn.mCustomScrollbar; })
+					.then(function () {
+						if ($.fn.mCustomScrollbar) $('.mobile-menu .menu-box').mCustomScrollbar();
+					})
+					.catch(function () {});
+			};
+
+			// Dropdown Button
+			$('.mobile-menu li.dropdown .dropdown-btn').on('click', function() {
+				$(this).toggleClass('open');
+				$(this).prev('ul').slideToggle(500);
+			});
+
+			ensureScrollbar();
+		}
+
+		function initStickyHeaderMenu() {
+			if (stickyMenuInitialized) return;
+			stickyMenuInitialized = true;
+
+			var $stickyMenu = $('.sticky-header .main-menu');
+			if ($stickyMenu.length && !$stickyMenu.children().length) {
+				var stickyMenuContent = $('.main-header .menu-area .main-menu').html();
+				$stickyMenu.append(stickyMenuContent);
+			}
+		}
+
+		//Menu Toggle Btn (lazy-init mobile menu on first open)
 		$('.mobile-nav-toggler').on('click', function() {
+			initMobileMenu();
 			$('body').addClass('mobile-menu-visible');
 		});
 
 		//Menu Toggle Btn
 		$('.mobile-menu .menu-backdrop,.mobile-menu .close-btn').on('click', function() {
 			$('body').removeClass('mobile-menu-visible');
+		});
+
+		// Lazy-init sticky header menu on first meaningful scroll
+		$(window).on('scroll', function () {
+			if (!stickyMenuInitialized && $(window).scrollTop() >= 110) {
+				initStickyHeaderMenu();
+			}
 		});
 	}
 
