@@ -258,7 +258,7 @@
 	
 			winDow.on('resize', function(){
 				var selector = $filter.find('li.active').attr('data-filter');
-
+	
 				$container.isotope({ 
 					filter	: selector,
 					animationOptions: {
@@ -281,8 +281,6 @@
 			});
 		}
 	}
-	
-	enableMasonry();
 
 
 	// Select menu 
@@ -704,17 +702,23 @@
 
 
 	/*	=========================================================================
-	When document is Scrollig, do
+	Defer non-critical UI initialisation to after window load to reduce TBT
 	========================================================================== */
-
+	
 	jQuery(document).on('ready', function () {
-		(function ($) {
-			// add your functions
-			progressBarConfig ();
-			selectDropdown();
-			donatepopup();
-			onHoverthreeDmovement();
-		})(jQuery);
+		// Run heavy, non-critical UI work after load + small delay
+		window.addEventListener('load', function () {
+			setTimeout(function () {
+				(function ($) {
+					progressBarConfig ();
+					selectDropdown();
+					donatepopup();
+					onHoverthreeDmovement();
+					enableMasonry();
+					expertizeRoundCircle ();
+				})(jQuery);
+			}, 500);
+		});
 	});
 
 
@@ -735,8 +739,6 @@
 	
 	$(window).on('load', function() {
 		handlePreloader();
-		enableMasonry();
-		expertizeRoundCircle ();
 	});
 
 	
