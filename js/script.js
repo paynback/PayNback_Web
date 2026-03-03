@@ -1,6 +1,33 @@
 (function($) {
 	
 	"use strict";
+
+	function loadScriptOnce(src, isLoaded) {
+		try {
+			if (typeof isLoaded === 'function' && isLoaded()) return Promise.resolve();
+		} catch (e) {}
+
+		// If the script tag is already present, just wait a tick and re-check.
+		var existing = document.querySelector('script[src="' + src + '"]');
+		if (existing) {
+			return new Promise(function(resolve) {
+				setTimeout(function() {
+					if (typeof isLoaded === 'function' && isLoaded()) return resolve();
+					// Still not detected; resolve anyway to avoid blocking.
+					resolve();
+				}, 0);
+			});
+		}
+
+		return new Promise(function(resolve, reject) {
+			var s = document.createElement('script');
+			s.src = src;
+			s.async = true;
+			s.onload = function() { resolve(); };
+			s.onerror = function() { reject(new Error('Failed to load ' + src)); };
+			document.head.appendChild(s);
+		});
+	}
 	
 	//Hide Loading Box (Preloader)
 	function handlePreloader() {
@@ -73,11 +100,13 @@
 	}
 
 	// Elements Animation
-	if($('.wow').length){
-		var wow = new WOW({
-		mobile:       false
-		});
-		wow.init();
+	function initWow() {
+		if($('.wow').length){
+			var wow = new WOW({
+				mobile: false
+			});
+			wow.init();
+		}
 	}
 
 	//Contact Form Validation
@@ -135,14 +164,17 @@
 
 
 	//LightBox / Fancybox
-	if($('.lightbox-image').length) {
-		$('.lightbox-image').fancybox({
-			openEffect  : 'fade',
-			closeEffect : 'fade',
-			helpers : {
-				media : {}
-			}
-		});
+	function initFancybox() {
+		// Only bind to anchor tags to avoid attaching Fancybox to <video>/<source> elements.
+		if($('a.lightbox-image').length && $.fn.fancybox) {
+			$('a.lightbox-image').fancybox({
+				openEffect  : 'fade',
+				closeEffect : 'fade',
+				helpers : {
+					media : {}
+				}
+			});
+		}
 	}
 
 
@@ -297,302 +329,313 @@
 
 
 	// Testimonial Carousel
-	if ($('.testimonial-carousel').length) {
-		$('.testimonial-carousel').owlCarousel({
-			animateOut: 'fadeOut',
-    		animateIn: 'fadeIn',
-			items:1,
-			loop:true,
-			margin:0,
-			nav:true,
-			smartSpeed: 300,
-			autoplay: 3000,
-			navText: [ '<span class="fas fa-long-arrow-alt-left"></span>', '<span class="fas fa-long-arrow-alt-right"></span>' ]
-		});  		
-	}
+	function initCarousels() {
+		// Guard: plugin may not be included on every page
+		if (!$.fn.owlCarousel) return;
+
+		if ($('.testimonial-carousel').length) {
+			$('.testimonial-carousel').owlCarousel({
+				animateOut: 'fadeOut',
+				animateIn: 'fadeIn',
+				items:1,
+				loop:true,
+				margin:0,
+				nav:true,
+				smartSpeed: 300,
+				autoplay: 3000,
+				navText: [ '<span class="fas fa-long-arrow-alt-left"></span>', '<span class="fas fa-long-arrow-alt-right"></span>' ]
+			});  		
+		}
 
 
-	// testimonial-carousel
-	if ($('.testimonial-carousel-2').length) {
-		$('.testimonial-carousel-2').owlCarousel({
-			loop:true,
-			margin:30,
-			nav:false,
-			smartSpeed: 3000,
-			autoplay: true,
-			navText: [ '<span class="flaticon-left"></span>', '<span class="flaticon-right"></span>' ],
-			responsive:{
-				0:{
-					items:1
-				},
-				480:{
-					items:1
-				},
-				600:{
-					items:1
-				},
-				800:{
-					items:1
-				},			
-				1200:{
-					items:1
+		// testimonial-carousel
+		if ($('.testimonial-carousel-2').length) {
+			$('.testimonial-carousel-2').owlCarousel({
+				loop:true,
+				margin:30,
+				nav:false,
+				smartSpeed: 3000,
+				autoplay: true,
+				navText: [ '<span class="flaticon-left"></span>', '<span class="flaticon-right"></span>' ],
+				responsive:{
+					0:{
+						items:1
+					},
+					480:{
+						items:1
+					},
+					600:{
+						items:1
+					},
+					800:{
+						items:1
+					},			
+					1200:{
+						items:1
+					}
+
 				}
-
-			}
-		});    		
-	}
+			});    		
+		}
 
 
-	// testimonial-carousel
-	if ($('.testimonial-carousel-3').length) {
-		$('.testimonial-carousel-3').owlCarousel({
-			loop:true,
-			margin:30,
-			nav:false,
-			smartSpeed: 3000,
-			autoplay: true,
-			navText: [ '<span class="fas fa-long-arrow-alt-left"></span>', '<span class="fas fa-long-arrow-alt-right"></span>' ],
-			responsive:{
-				0:{
-					items:1
-				},
-				480:{
-					items:1
-				},
-				600:{
-					items:1
-				},
-				800:{
-					items:1
-				},			
-				1200:{
-					items:1
+		// testimonial-carousel
+		if ($('.testimonial-carousel-3').length) {
+			$('.testimonial-carousel-3').owlCarousel({
+				loop:true,
+				margin:30,
+				nav:false,
+				smartSpeed: 3000,
+				autoplay: true,
+				navText: [ '<span class="fas fa-long-arrow-alt-left"></span>', '<span class="fas fa-long-arrow-alt-right"></span>' ],
+				responsive:{
+					0:{
+						items:1
+					},
+					480:{
+						items:1
+					},
+					600:{
+						items:1
+					},
+					800:{
+						items:1
+					},			
+					1200:{
+						items:1
+					}
+
 				}
-
-			}
-		});    		
-	}
+			});    		
+		}
 
 
-	// Four Item Carousel
-	if ($('.four-item-carousel').length) {
-		$('.four-item-carousel').owlCarousel({
-			loop:true,
-			margin:30,
-			nav:true,
-			autoHeight: true,
-			smartSpeed: 500,
-			autoplay: 5000,
-			navText: [ '<span class="fas fa-angle-left"></span>', '<span class="fas fa-angle-right"></span>' ],
-			responsive:{
-				0:{
-					items:1
-				},
-				600:{
-					items:2
-				},
-				800:{
-					items:3
-				},
-				1024:{
-					items:3
-				},
-				1200:{
-					items:4
+		// Four Item Carousel
+		if ($('.four-item-carousel').length) {
+			$('.four-item-carousel').owlCarousel({
+				loop:true,
+				margin:30,
+				nav:true,
+				autoHeight: true,
+				smartSpeed: 500,
+				autoplay: 5000,
+				navText: [ '<span class="fas fa-angle-left"></span>', '<span class="fas fa-angle-right"></span>' ],
+				responsive:{
+					0:{
+						items:1
+					},
+					600:{
+						items:2
+					},
+					800:{
+						items:3
+					},
+					1024:{
+						items:3
+					},
+					1200:{
+						items:4
+					}
 				}
-			}
-		});    		
-	}
+			});    		
+		}
 
 
-	// Four Item Carousel
-	if ($('.four-item-carousel-2').length) {
-		$('.four-item-carousel-2').owlCarousel({
-			loop:true,
-			margin:60,
-			nav:true,
-			autoHeight: true,
-			smartSpeed: 500,
-			autoplay: 5000,
-			navText: [ '<span class="fas fa-angle-left"></span>', '<span class="fas fa-angle-right"></span>' ],
-			responsive:{
-				0:{
-					items:1
-				},
-				600:{
-					items:2
-				},
-				800:{
-					items:3
-				},
-				1024:{
-					items:3
-				},
-				1200:{
-					items:4
+		// Four Item Carousel
+		if ($('.four-item-carousel-2').length) {
+			$('.four-item-carousel-2').owlCarousel({
+				loop:true,
+				margin:60,
+				nav:true,
+				autoHeight: true,
+				smartSpeed: 500,
+				autoplay: 5000,
+				navText: [ '<span class="fas fa-angle-left"></span>', '<span class="fas fa-angle-right"></span>' ],
+				responsive:{
+					0:{
+						items:1
+					},
+					600:{
+						items:2
+					},
+					800:{
+						items:3
+					},
+					1024:{
+						items:3
+					},
+					1200:{
+						items:4
+					}
 				}
-			}
-		});    		
-	}
+			});    		
+		}
 
 
-	//single-item-carousel
-	if ($('.single-item-carousel').length) {
-		$('.single-item-carousel').owlCarousel({
-			loop:true,
-			margin:0,
-			nav:true,
-			animateOut: 'fadeOut',
-    		animateIn: 'fadeIn',
-    		active: true,
-			smartSpeed: 1000,
-			autoplay: 6000,
-			navText: [ '<span class="flaticon-left-arrow"></span>', '<span class="flaticon-right-arrow"></span>' ],
-			dots: true,
-			responsive:{
-				0:{
-					items:1
-				},
-				600:{
-					items:1
-				},
-				1024:{
-					items:1
+		//single-item-carousel
+		if ($('.single-item-carousel').length) {
+			$('.single-item-carousel').owlCarousel({
+				loop:true,
+				margin:0,
+				nav:true,
+				animateOut: 'fadeOut',
+				animateIn: 'fadeIn',
+				active: true,
+				smartSpeed: 1000,
+				autoplay: 6000,
+				navText: [ '<span class="flaticon-left-arrow"></span>', '<span class="flaticon-right-arrow"></span>' ],
+				dots: true,
+				responsive:{
+					0:{
+						items:1
+					},
+					600:{
+						items:1
+					},
+					1024:{
+						items:1
+					}
 				}
-			}
-		});     		
-	}
+			});     		
+		}
 
 
-	// clients-carousel
-	if ($('.clients-carousel').length) {
-		$('.clients-carousel').owlCarousel({
-			loop:true,
-			margin:30,
-			nav:false,
-			smartSpeed: 3000,
-			autoplay: true,
-			navText: [ '<span class="fa fa-angle-left"></span>', '<span class="fa fa-angle-right"></span>' ],
-			responsive:{
-				0:{
-					items:1
-				},
-				480:{
-					items:2
-				},
-				600:{
-					items:3
-				},
-				800:{
-					items:4
-				},			
-				1200:{
-					items:4
+		// clients-carousel
+		if ($('.clients-carousel').length) {
+			$('.clients-carousel').owlCarousel({
+				loop:true,
+				margin:30,
+				nav:false,
+				smartSpeed: 3000,
+				autoplay: true,
+				navText: [ '<span class="fa fa-angle-left"></span>', '<span class="fa fa-angle-right"></span>' ],
+				responsive:{
+					0:{
+						items:1
+					},
+					480:{
+						items:2
+					},
+					600:{
+						items:3
+					},
+					800:{
+						items:4
+					},			
+					1200:{
+						items:4
+					}
+
 				}
-
-			}
-		});    		
-	}
+			});    		
+		}
 
 
-	// clients-carousel
-	if ($('.clients-carousel-2').length) {
-		$('.clients-carousel-2').owlCarousel({
-			loop:true,
-			margin:30,
-			nav:false,
-			smartSpeed: 3000,
-			autoplay: true,
-			navText: [ '<span class="fa fa-angle-left"></span>', '<span class="fa fa-angle-right"></span>' ],
-			responsive:{
-				0:{
-					items:1
-				},
-				480:{
-					items:2
-				},
-				600:{
-					items:3
-				},
-				800:{
-					items:4
-				},			
-				1200:{
-					items:5
+		// clients-carousel
+		if ($('.clients-carousel-2').length) {
+			$('.clients-carousel-2').owlCarousel({
+				loop:true,
+				margin:30,
+				nav:false,
+				smartSpeed: 3000,
+				autoplay: true,
+				navText: [ '<span class="fa fa-angle-left"></span>', '<span class="fa fa-angle-right"></span>' ],
+				responsive:{
+					0:{
+						items:1
+					},
+					480:{
+						items:2
+					},
+					600:{
+						items:3
+					},
+					800:{
+						items:4
+					},			
+					1200:{
+						items:5
+					}
+
 				}
-
-			}
-		});    		
-	}
+			});    		
+		}
 
 
-	//three-column-carousel
-	    if ($('.three-column-carousel').length) {
+		//three-column-carousel
+		if ($('.three-column-carousel').length) {
 			$('.three-column-carousel').owlCarousel({
-			loop:true,
-			margin:30,
-			nav:false,
-			smartSpeed: 3000,
-			autoplay: true,
-			navText: [ '<span class="fas fa-arrow-left"></span>', '<span class="fas fa-arrow-right"></span>' ],
-			responsive:{
-				0:{
-					items:1
-				},
-				480:{
-					items:1
-				},
-				600:{
-					items:2
-				},
-				800:{
-					items:2
-				},
-				1024:{
-					items:3
+				loop:true,
+				margin:30,
+				nav:false,
+				smartSpeed: 3000,
+				autoplay: true,
+				navText: [ '<span class="fas fa-arrow-left"></span>', '<span class="fas fa-arrow-right"></span>' ],
+				responsive:{
+					0:{
+						items:1
+					},
+					480:{
+						items:1
+					},
+					600:{
+						items:2
+					},
+					800:{
+						items:2
+					},
+					1024:{
+						items:3
+					}
 				}
-			}
-		});    		
-	}
+			});    		
+		}
 
 
-	//two-column-carousel
-	    if ($('.two-column-carousel').length) {
+		//two-column-carousel
+		if ($('.two-column-carousel').length) {
 			$('.two-column-carousel').owlCarousel({
-			loop:true,
-			margin:50,
-			nav:true,
-			smartSpeed: 3000,
-			autoplay: 4000,
-			navText: [ '<span class="fa fa-caret-left"></span>', '<span class="fa fa-caret-right"></span>' ],
-			responsive:{
-				0:{
-					items:1
-				},
-				480:{
-					items:1
-				},
-				600:{
-					items:1
-				},
-				800:{
-					items:2
-				},
-				1024:{
-					items:2
+				loop:true,
+				margin:50,
+				nav:true,
+				smartSpeed: 3000,
+				autoplay: 4000,
+				navText: [ '<span class="fa fa-caret-left"></span>', '<span class="fa fa-caret-right"></span>' ],
+				responsive:{
+					0:{
+						items:1
+					},
+					480:{
+						items:1
+					},
+					600:{
+						items:1
+					},
+					800:{
+						items:2
+					},
+					1024:{
+						items:2
+					}
 				}
-			}
-		});    		
+			});    		
+		}
 	}
 
 
 	if($('.paroller').length){
-		$('.paroller').paroller({
-			  factor: 0.05,            // multiplier for scrolling speed and offset, +- values for direction control  
-			  factorLg: 0.05,          // multiplier for scrolling speed and offset if window width is less than 1200px, +- values for direction control  
-			  type: 'foreground',     // background, foreground  
-			  direction: 'horizontal' // vertical, horizontal  
-		});
+		// Defer paroller init (can be expensive) to after load
+	}
+
+	function initParoller() {
+		if($('.paroller').length && $.fn.paroller){
+			$('.paroller').paroller({
+				factor: 0.05,
+				factorLg: 0.05,
+				type: 'foreground',
+				direction: 'horizontal'
+			});
+		}
 	}
 
 
@@ -669,22 +712,22 @@
 	}
 
 
-	//BX-Slider
-	if($('.events-slide').length){
-		$('.events-slide').bxSlider({
-
-			auto:true,
-			mode:'vertical',
-			nextSelector: '#slider-next',
-			nextText: '',
-			navText: [ '<span class="fa fa-angle-left"></span>', '<span class="fa fa-angle-right"></span>' ],
-			maxSlides: 3,
-			minSlides: 3,
-			moveSlides: 1,
-			pause: 5000,
-			speed: 700,
-			pager: false
-		});
+	function initBxSlider() {
+		if($('.events-slide').length && $.fn.bxSlider){
+			$('.events-slide').bxSlider({
+				auto:true,
+				mode:'vertical',
+				nextSelector: '#slider-next',
+				nextText: '',
+				navText: [ '<span class="fa fa-angle-left"></span>', '<span class="fa fa-angle-right"></span>' ],
+				maxSlides: 3,
+				minSlides: 3,
+				moveSlides: 1,
+				pause: 5000,
+				speed: 700,
+				pager: false
+			});
+		}
 	}
 
 
@@ -706,10 +749,15 @@
 	========================================================================== */
 	
 	jQuery(document).on('ready', function () {
-		// Run heavy, non-critical UI work after load + small delay
+		// Run heavy, non-critical UI work after load + small delay (reduces TBT)
 		window.addEventListener('load', function () {
-			setTimeout(function () {
+			var run = function () {
 				(function ($) {
+					initWow();
+					initCarousels();
+					initFancybox();
+					initParoller();
+					initBxSlider();
 					progressBarConfig ();
 					selectDropdown();
 					donatepopup();
@@ -717,7 +765,35 @@
 					enableMasonry();
 					expertizeRoundCircle ();
 				})(jQuery);
-			}, 500);
+			};
+
+			var boot = function () {
+				var loads = [];
+
+				// Load optional libraries only when needed on the page.
+				if ($('.wow').length && (typeof WOW === 'undefined')) {
+					loads.push(loadScriptOnce('js/wow.js', function () { return typeof WOW !== 'undefined'; }));
+				}
+				if (($('.testimonial-carousel, .testimonial-carousel-2, .testimonial-carousel-3, .four-item-carousel, .four-item-carousel-2, .single-item-carousel, .clients-carousel, .clients-carousel-2, .three-column-carousel, .two-column-carousel').length) && (!$.fn.owlCarousel)) {
+					loads.push(loadScriptOnce('js/owl.js', function () { return !!$.fn.owlCarousel; }));
+				}
+				if ($('.js-tilt').length && (!$.fn.tilt)) {
+					loads.push(loadScriptOnce('js/tilt.jquery.js', function () { return !!$.fn.tilt; }));
+				}
+				if ($('a.lightbox-image').length && (!$.fn.fancybox)) {
+					loads.push(loadScriptOnce('js/jquery.fancybox.js', function () { return !!$.fn.fancybox; }));
+				}
+
+				Promise.allSettled(loads).then(function () {
+					run();
+				});
+			};
+
+			if ('requestIdleCallback' in window) {
+				requestIdleCallback(boot, { timeout: 1500 });
+			} else {
+				setTimeout(boot, 500);
+			}
 		});
 	});
 
