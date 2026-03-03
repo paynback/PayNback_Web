@@ -1438,17 +1438,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- Core JS (trimmed to only what this page uses to reduce TBT) -->
     <script defer src="js/jquery.js"></script>
-    <script defer src="js/popper.min.js"></script>
-    <script defer src="js/bootstrap.min.js"></script>
+    <!-- Popper/Bootstrap JS removed from critical path (CSS grid still works) -->
     <!-- scrollbar.js is loaded on-demand by js/script.js -->
     <!-- Owl/WOW/Tilt are loaded on-demand by js/script.js after page load -->
 
     <!-- main-js -->
     <script defer src="js/script.js"></script>
 
-    <!-- Navigation Active State and Hover Effects -->
+    <!-- Navigation Active State and Hover Effects (idle to reduce TBT) -->
     <script>
         (function() {
+            function run() {
             // Get current page filename
             var currentPage = window.location.pathname.split('/').pop() || 'index.html';
             // Handle case where pathname might be empty or just '/'
@@ -1528,6 +1528,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             } else {
                 // DOM already loaded, apply one more time
                 setTimeout(applyActiveStates, 200);
+            }
+            }
+
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(run, { timeout: 1500 });
+            } else {
+                setTimeout(run, 200);
             }
         })();
     </script>
